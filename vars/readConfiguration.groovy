@@ -5,7 +5,7 @@ def call() {
     def workdir = "${env.APP_WORKDIR}"
     dir(workdir) {
         echo "Hello wtf"
-        conf = readYml 'continuous-deployment/config.yml'
+        conf = readYaml file:'continuous-deployment/config.yml'
         return conf
     }
 }
