@@ -1,3 +1,5 @@
+package com.duvalhub
+
 class GitCloneRequest {
     String directory
     String url
