@@ -1,4 +1,6 @@
 def call() {
-    conf = readYml 'config.yml'
-    return conf
+    dir(env.APP_WORDIR) {
+        conf = readYml 'continuous-deployment/config.yml'
+        return conf
+    }
 }

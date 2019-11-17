@@ -8,4 +8,9 @@ class GitCloneRequest {
         this.url = url
         this.directory = directory
     }
+
+    GitCloneRequest(String url ) {
+        this.url = url
+        this.directory = "cloned"
+    }
 }

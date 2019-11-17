@@ -5,12 +5,11 @@ def call() {
   node {
     echo "Hello from pipeline"
 
-    stage('Initialization') {
-      GitCloneRequest request = new GitCloneRequest("https://github.com/duvalhub/helloworld-app.git", "hello-world")
-      gitClone(request)
+    initializeWorkdirStage()
 
-      sh "ls -l"
-    }
+    conf = readConfiguration()
+
+    echo conf
 
   }
 
