@@ -1,1 +1,4 @@
-echo "Hello from pipeline"
+def call() {
+  echo "Hello from pipeline"
+}
+
