@@ -8,7 +8,7 @@ def call() {
 
     conf = readConfiguration()
 
-    echo conf
+    echo "${conf}"
 
   }
 
