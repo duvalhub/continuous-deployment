@@ -1,12 +1,18 @@
 import com.duvalhub.GitCloneRequest
 
 def call() {
-  echo "Hello from pipeline"
 
-  GitCloneRequest request = new GitCloneRequest("git@github.com:duvalhub/helloworld-app.git", "hello-world")
-  gitClone(request)
+  node {
+    echo "Hello from pipeline"
 
-  sh "ls -l"
+    stage('Initialization') {
+      GitCloneRequest request = new GitCloneRequest("git@github.com:duvalhub/helloworld-app.git", "hello-world")
+      gitClone(request)
+
+      sh "ls -l"
+    }
+
+  }
 
 }
 
