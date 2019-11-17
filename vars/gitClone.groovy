@@ -2,6 +2,6 @@ import com.duvalhub.GitCloneRequest
 
 def call(GitCloneRequest request) {
 
-    sh "git clone ${request.url} ${request.directory}"
+    sh "rm -rf ${request.directory} && git clone ${request.url} ${request.directory}"
 
 }
