@@ -1,3 +1,5 @@
+import com.duvalhub.GitCloneRequest
+
 def call() {
 
     GitCloneRequest request = new GitCloneRequest("https://github.com/duvalhub/helloworld-app.git", "hello-world")

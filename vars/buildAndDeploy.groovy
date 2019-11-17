@@ -1,4 +1,3 @@
-import com.duvalhub.GitCloneRequest
 
 def call() {
 
