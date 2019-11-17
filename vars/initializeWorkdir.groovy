@@ -6,7 +6,7 @@ def call() {
     echo "$WORKSPACE"
     current = sh returnStdout: true, script: 'pwd'
     echo "${current}"
-    GitCloneRequest request = new GitCloneRequest("https://github.com/duvalhub/helloworld-app.git", "hello-world")
+    GitCloneRequest request = new GitCloneRequest("https://github.com/duvalhub/helloworld-app.git", request.directory)
     gitClone(request)
     env.APP_WORKDIR = "$WORKSPACE/${request.directory}"
     sh "ls -l"
