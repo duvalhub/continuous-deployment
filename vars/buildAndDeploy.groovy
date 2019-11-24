@@ -10,6 +10,7 @@ echo BRANCH_NAME
 
 //dockerSlave() {
 node {
+  sh "ls -all"
   scm 
   echo "hello"
   sh "ls -all"
