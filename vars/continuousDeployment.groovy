@@ -12,11 +12,13 @@ def call() {
     ProcessBranchNameRequest processBranchNameRequest = new ProcessBranchNameRequest(BRANCH_NAME)
     ProcessBranchNameResponse processBranchNameResponse = processBranchName(processBranchNameRequest)
 
-    echo processBranchNameResponse.toString()
-
-//    BuildRequest buildRequest = new BuildRequest()
-//    buildRequest.appConfig = conf
-//    build(buildRequest)
+    if ( processBranchNameResponse.doBuild ) {
+      echo "### Building app on version '${processBranchNameResponse.version}'"
+      BuildRequest buildRequest = new BuildRequest()
+      buildRequest.appConfig = conf
+      buildRequest.version = processBranchNameResponse.version
+      build(buildRequest)
+    }
   }
 }
 

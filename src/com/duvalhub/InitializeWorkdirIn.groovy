@@ -1,6 +1,8 @@
 package com.duvalhub
 
-class InitializeWorkdirIn {
+import com.duvalhub.BaseObject
+
+class InitializeWorkdirIn extends BaseObject {
     String appWorkdir
     String appGitUrl
     String appToCheckout

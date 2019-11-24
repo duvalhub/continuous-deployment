@@ -1,16 +1,13 @@
 package com.duvalhub
 
+import com.duvalhub.BaseObject
 import groovy.json.JsonBuilder
 
-class ProcessBranchNameRequest {
+class ProcessBranchNameRequest extends BaseObject {
     String branchName
 
     ProcessBranchNameRequest(String branchName) {
         this.branchName = branchName
-    }
-
-    String toString() {
-        return new JsonBuilder( this ).toPrettyString()
     }
 
 }

@@ -1,14 +1,10 @@
 package com.duvalhub
 
+import com.duvalhub.BaseObject
 import groovy.json.JsonBuilder
 
-class AppConfig {
+class AppConfig extends BaseObject {
     App app
-
-    String toString() {
-        return new JsonBuilder( this ).toPrettyString()
-    }
-
 }
 
 class App {

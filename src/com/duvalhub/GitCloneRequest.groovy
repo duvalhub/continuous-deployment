@@ -1,6 +1,8 @@
 package com.duvalhub
 
-class GitCloneRequest {
+import com.duvalhub.BaseObject
+
+class GitCloneRequest extends BaseObject {
     String directory
     String url
     String toCheckout
