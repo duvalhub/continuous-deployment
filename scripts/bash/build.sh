@@ -3,6 +3,7 @@ set -e
 
 mv $DOCKERFILE_PATH Dockerfile
 mv $TEMPLATE_PATH docker
+docker version
 /usr/bin/docker build -t "$IMAGE" .
 
 echo "hello from script"
