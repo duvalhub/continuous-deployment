@@ -1,6 +1,9 @@
 import com.duvalhub.BuildRequest
 import com.duvalhub.AppConfig
 
+import com.duvalhub.ProcessBranchNameRequest
+import com.duvalhub.ProcessBranchNameResponse
+
 def call() {
   dockerSlave() {
     initializeWorkdirStage()
