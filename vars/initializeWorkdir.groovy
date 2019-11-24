@@ -10,7 +10,7 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
         GitCloneRequest request = new GitCloneRequest(params.appGitUrl, params.appWorkdir)
         gitClone(request)
     } else {
-        dir(request.appWorkdir) {
+        dir(params.appWorkdir) {
             checkout scm
         }
     }
