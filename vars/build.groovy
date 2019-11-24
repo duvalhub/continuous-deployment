@@ -4,7 +4,7 @@ import com.duvalhub.AppConfig
 def call(BuildRequest buildRequest) {
   stage('Build And Push to remote') {
     AppConfig conf = buildRequest.appConfig
-    def appTye = conf.app.type
+    def appType = conf.app.type
     String version = buildRequest.version
     String image = conf.getDockerImage()
     
