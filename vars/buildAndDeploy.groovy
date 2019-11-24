@@ -5,11 +5,11 @@ def call() {
 //  echo "hello form container"
 //  sh "git --version"
 //}
-dockerNode('jenkins/slave') {
- echo "hello"
-          sh "ls -l"
-          sh "pwd"
-          sh "git --version"
+dockerNode {
+  echo "hello"
+  sh "ls -l"
+  sh "pwd"
+  sh "git --version"
 }
 /*
   docker.withServer('tcp://docker-dev.philippeduval.ca:2376', env.DOCKER_BUNDLE_ID) {
