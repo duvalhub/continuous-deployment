@@ -7,9 +7,9 @@ def call() {
 //}
 echo "allo"
 echo BRANCH_NAME
-sh "ls -l"
 
-dockerSlave() {
+//dockerSlave() {
+node {
   scm 
   echo "hello"
   sh "ls -all"
