@@ -10,6 +10,13 @@ dockerSlave() {
   sh "ls -l"
   sh "pwd"
   sh "git --version"
+  echo "Hello from pipeline"
+
+    initializeWorkdirStage()
+
+    conf = readConfiguration()
+
+    echo "${conf}"
 }
 /*
   docker.withServer('tcp://docker-dev.philippeduval.ca:2376', env.DOCKER_BUNDLE_ID) {
