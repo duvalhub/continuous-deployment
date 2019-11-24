@@ -4,10 +4,7 @@ set -e
 mv $DOCKERFILE_PATH Dockerfile
 mv $TEMPLATE_PATH docker
 docker version
-/usr/bin/docker build -t "$IMAGE" .
+/usr/bin/docker build --build-arg TEMPLATE_PATH=docker -t "$IMAGE" .
 
-echo "hello from script"
-echo $DOCKER_CREDENTIALS_PSW
-echo $DOCKER_CREDENTIALS_USR
-echo "$DOCKER_CREDENTIALS_PSW" | docker login --username "$DOCKER_CREDENTIALS_USR" --password-stdin "$DOCKER_REGISTRY"
-docker push "$IMAGE"
+echo "$DOCKER_CREDENTIALS_PSW" | docker login --username "$DOCKER_CREDENTIALS_USR" --password-stdin 2> /dev/null
+docker push "$IMAGE" 
