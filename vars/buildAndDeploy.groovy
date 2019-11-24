@@ -23,9 +23,9 @@ dockerSlave() {
   echo "$BRANCH_NAME"
   echo "+++++++++++++++++++++++++++++++++yy"
   echo "$GIT_URL"
-  return
     initializeWorkdirStage()
 
+  return
     conf = readConfiguration()
 
     echo "${conf}"
