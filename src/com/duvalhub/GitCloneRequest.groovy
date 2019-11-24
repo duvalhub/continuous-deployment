@@ -6,13 +6,12 @@ class GitCloneRequest {
     String toCheckout
 
     GitCloneRequest(String url, String directory, String toCheckout) {
-        this.url = url
-        this.directory = directory
+        this(url, directory)
         this.toCheckout = toCheckout
     }
 
     GitCloneRequest(String url, String directory) {
-        this.url = url
+        this(url)
         this.directory = directory
     }
 
