@@ -6,6 +6,7 @@ def call() {
 //  sh "git --version"
 //}
 echo "allo"
+echo BRANCH_NAME
 sh "ls -l"
 
 dockerSlave() {
