@@ -6,6 +6,7 @@ def call() {
 //  sh "git --version"
 //}
 dockerSlave() {
+  scm 
   echo "hello"
   sh "ls -all"
   sh "pwd"
