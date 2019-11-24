@@ -5,8 +5,8 @@ def call() {
     initializeWorkdirStage()
     conf = readConfiguration()
 
-    BuildAndPushRequest buildAndPushRequest = new BuildAndPushRequest()
-    buildAndPush()
+//    BuildAndPushRequest buildAndPushRequest = new BuildAndPushRequest()
+//    buildAndPush()
 
     echo "${conf}"
     sh "ls -l $APP_WORKDIR"
