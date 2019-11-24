@@ -6,9 +6,14 @@ def call() {
     initializeWorkdirStage()
     AppConfig conf = readConfiguration()
 
-    BuildRequest buildRequest = new BuildRequest()
-    buildRequest.appConfig = conf
-    build(buildRequest)
+    ProcessBranchNameRequest processBranchNameRequest = new ProcessBranchNameRequest(BRANCH_NAME)
+    ProcessBranchNameResponse processBranchNameResponse = processBranchName(processBranchNameRequest)
+
+    echo processBranchNameResponse
+
+//    BuildRequest buildRequest = new BuildRequest()
+//    buildRequest.appConfig = conf
+//    build(buildRequest)
   }
 }
 
