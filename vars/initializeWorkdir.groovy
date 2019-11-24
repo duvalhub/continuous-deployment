@@ -7,18 +7,18 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
 
     echo "### Cloning App into Workdir..."
     if (params.appGitUrl) {
-        GitCloneRequest request = new GitCloneRequest(params.appGitUrl, params.appWorkdir)
-        gitClone(request)
+        GitCloneRequest appRequest = new GitCloneRequest(params.appGitUrl, params.appWorkdir)
+        gitClone(appRequest)
     } else {
         dir(params.appWorkdir) {
             checkout scm
         }
     }
-    env.APP_WORKDIR = "$WORKSPACE/${request.directory}"
+    env.APP_WORKDIR = "$WORKSPACE/${params.appWorkdir}"
 
     echo "### Cloning Jenkins into Workdir..."
-    GitCloneRequest request = new GitCloneRequest(params.pipelineWorkdir, params.pipelineGitUrl)
-    gitClone(request)
-    env.PIPELINE_WORKDIR = "$WORKSPACE/${request.directory}"
+    GitCloneRequest pipRequest = new GitCloneRequest(params.pipelineWorkdir, params.pipelineGitUrl)
+    gitClone(pipRequest)
+    env.PIPELINE_WORKDIR = "$WORKSPACE/${params.pipelineWorkdir}"
 
 }
