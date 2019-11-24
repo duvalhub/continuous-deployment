@@ -43,11 +43,11 @@ def call(ProcessBranchNameRequest request) {
   }
 
   if ( response.doBuild ) {
-      echo "Building version ${response.version} from branch ${branchName}"
+      echo "Building version '${response.version}' from branch '${branchName}'"
   }
  
   if ( response.doDeploy ) {
-      echo "Promoting version ${response.version} in ${response.deployEnv}"
+      echo "Promoting version '${response.version}' in '${response.deployEnv}'"
   }
   
   return response
