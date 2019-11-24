@@ -9,7 +9,7 @@ class InitializeWorkdirIn {
     String pipelineToCheckout
 
     InitializeWorkdirIn() {
-        this.pipelineGitUrl = "https://github.com/duvalhub/continuous-deployment.git"
+        this.pipelineGitUrl = "https://github.com/duvalhub/continous-deployment.git"
         this.pipelineWorkdir = "jenkins-workdir"
         this.appWorkdir = "app-workdir"
     }
