@@ -13,9 +13,13 @@ dockerSlave() {
   echo "Hello from pipeline"
 
   sh "env"
+  echo "+++++++++++++++++++++++++++++++++yy"
+  sh "git -v remote"
   sh "env | grep GIT"
+  echo "+++++++++++++++++++++++++++++++++yy"
   sh "git -v remote"
   echo "$GIT_URL"
+  echo "+++++++++++++++++++++++++++++++++yy"
   echo "$BRANCH_NAME"
   return
     initializeWorkdirStage()
