@@ -14,6 +14,8 @@ dockerSlave() {
 
   sh "env"
   sh "env | grep GIT"
+  echo "$GIT_URL"
+  echo "$BRANCH_NAME"
   return
     initializeWorkdirStage()
 
