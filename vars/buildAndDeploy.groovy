@@ -5,6 +5,7 @@ def call() {
 //  echo "hello form container"
 //  sh "git --version"
 //}
+echo "allo"
 dockerSlave() {
   scm 
   echo "hello"
