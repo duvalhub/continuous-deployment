@@ -14,6 +14,9 @@ node {
   scm 
   echo "hello"
   sh "ls -all"
+  dir('hello-world') {
+    sh "ls -all"
+  }
   sh "pwd"
   sh "git --version"
   echo "Hello from pipeline"
