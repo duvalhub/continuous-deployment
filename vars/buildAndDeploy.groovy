@@ -8,8 +8,8 @@ def call() {
 echo "allo"
 echo BRANCH_NAME
 
-//dockerSlave() {
-node {
+dockerSlave() {
+//node {
   sh "ls -all"
   checkout scm 
   echo "hello"
