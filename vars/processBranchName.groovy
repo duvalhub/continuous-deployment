@@ -5,11 +5,9 @@ import com.duvalhub.AppConfig
 def call(ProcessBranchNameRequest request) {
   ProcessBranchNameResponse response = new ProcessBranchNameResponse()
   String branchName = request.branchName
-  echo "Branch is : ${branchName}"
   def releasePattern = /release\/(v.*)/
 
   switch(branchName) {
-  
       case "develop":
           response.doBuild = true
           response.version = "latest"
@@ -28,7 +26,6 @@ def call(ProcessBranchNameRequest request) {
   
       case "master":
           response.doDeploy = true
-//          sh "git remote set-url origin https://${GITHUB_CREDENTIALS_USR}:${GITHUB_CREDENTIALS_PSW}@${GITHUB_URL}"
           dir( env.APP_WORKDIR ) {
             sh "git fetch --tags > /dev/null"
             response.version = sh (returnStdout: true, script: '''
