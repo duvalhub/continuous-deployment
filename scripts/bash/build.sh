@@ -1,7 +1,6 @@
 #!/bin/sh
 set -e
 
-export DOCKER_HOST=tcp://docker-dev.philippeduval.ca:2376 DOCKER_TLS_VERIFY=1
 mv $DOCKERFILE_PATH Dockerfile
 mv $TEMPLATE_PATH docker
 /usr/bin/docker build -t "$IMAGE" .
