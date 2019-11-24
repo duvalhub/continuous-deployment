@@ -9,7 +9,6 @@ dockerSlave() {
   echo "hello"
   sh "ls -all"
   sh "pwd"
-  return
   sh "git --version"
   echo "Hello from pipeline"
 
