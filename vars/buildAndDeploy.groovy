@@ -14,7 +14,6 @@ dockerSlave() {
 
   sh "env"
   echo "+++++++++++++++++++++++++++++++++yy"
-  sh "git -v remote"
   sh "env | grep GIT"
   echo "+++++++++++++++++++++++++++++++++yy"
   sh "git remote -v"
