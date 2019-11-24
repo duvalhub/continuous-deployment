@@ -1,6 +1,9 @@
 package com.duvalhub
 
+import com.duvalhub.AppConfig
+
 class BuildAndPushRequest {
+    AppConfig appConfig
     String directory
     String url
     String toCheckout

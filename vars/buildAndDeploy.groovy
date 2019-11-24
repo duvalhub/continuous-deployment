@@ -1,9 +1,10 @@
 import com.duvalhub.BuildAndPushRequest
+import com.duvalhub.AppConfig
 
 def call() {
   dockerSlave() {
     initializeWorkdirStage()
-    conf = readConfiguration()
+    AppConfig conf = readConfiguration()
 
 //    BuildAndPushRequest buildAndPushRequest = new BuildAndPushRequest()
 //    buildAndPush()
