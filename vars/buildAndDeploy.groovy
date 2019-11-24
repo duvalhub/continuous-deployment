@@ -11,7 +11,7 @@ echo BRANCH_NAME
 //dockerSlave() {
 node {
   sh "ls -all"
-  scm 
+  checkout scm 
   echo "hello"
   sh "ls -all"
   dir('hello-world') {
