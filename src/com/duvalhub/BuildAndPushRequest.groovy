@@ -5,17 +5,17 @@ class BuildAndPushRequest {
     String url
     String toCheckout
 
-    GitCloneRequest(String url, String directory, String toCheckout) {
+    BuildAndPushRequest(String url, String directory, String toCheckout) {
         this(url, directory)
         this.toCheckout = toCheckout
     }
 
-    GitCloneRequest(String url, String directory) {
+    BuildAndPushRequest(String url, String directory) {
         this(url)
         this.directory = directory
     }
 
-    GitCloneRequest(String url ) {
+    BuildAndPushRequest(String url ) {
         this.url = url
         this.directory = "cloned"
     }
