@@ -15,10 +15,13 @@ dockerSlave() {
   sh "env"
   echo "+++++++++++++++++++++++++++++++++yy"
   sh "git remote -v"
-  sh "git config --get remote.origin.url" 
-  echo "$GIT_URL"
+  echo "+++++++++++++++++++++++++++++++++yy"
+  def gitUrl = sh returnStdout: true, script: 'git config --get remote.origin.urlù'
+  echo gitUrl
   echo "+++++++++++++++++++++++++++++++++yy"
   echo "$BRANCH_NAME"
+  echo "+++++++++++++++++++++++++++++++++yy"
+  echo "$GIT_URL"
   return
     initializeWorkdirStage()
 
