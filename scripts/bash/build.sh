@@ -10,4 +10,4 @@ echo "hello from script"
 echo $DOCKER_CREDENTIALS_PSW
 echo $DOCKER_CREDENTIALS_USR
 echo "$DOCKER_CREDENTIALS_PSW" | docker login --username "$DOCKER_CREDENTIALS_USR" --password-stdin "$DOCKER_REGISTRY"
-docker push "$FULL_NAME"
+docker push "$IMAGE"
