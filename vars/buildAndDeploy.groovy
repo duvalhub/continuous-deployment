@@ -14,6 +14,7 @@ dockerSlave() {
 
   sh "env"
   sh "env | grep GIT"
+  sh "git -v remote"
   echo "$GIT_URL"
   echo "$BRANCH_NAME"
   return
