@@ -35,11 +35,11 @@ def call(ProcessBranchNameRequest request) {
                 echo $(git tag --points-at HEAD)
                 ''').trim()
           }
-          reponse.deployEnv = "prod"
+          response.deployEnv = "prod"
       default:
         response.doBuild = true
         response.version = "latest"
-        reponse.doDeploy = false
+        response.doDeploy = false
   }
 
   if ( response.doBuild ) {
