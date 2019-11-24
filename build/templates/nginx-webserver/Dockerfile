@@ -1,9 +1,9 @@
 FROM node:lts as builder
 WORKDIR /tmp/dockerbuild
-COPY ./app/package.json ./
+COPY ./package.json ./
 RUN npm install
-COPY app/src ./src
-COPY app/public ./public
+COPY src ./src
+COPY public ./public
 RUN npm run build
 
 FROM nginx
