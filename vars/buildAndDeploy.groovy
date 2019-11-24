@@ -5,7 +5,7 @@ def call() {
 //  echo "hello form container"
 //  sh "git --version"
 //}
-dockerNode() {
+dockerSlave() {
   echo "hello"
   sh "ls -l"
   sh "pwd"
