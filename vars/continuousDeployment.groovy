@@ -12,7 +12,7 @@ def call() {
     ProcessBranchNameRequest processBranchNameRequest = new ProcessBranchNameRequest(BRANCH_NAME)
     ProcessBranchNameResponse processBranchNameResponse = processBranchName(processBranchNameRequest)
 
-    echo processBranchNameResponse
+    echo processBranchNameResponse.toString()
 
 //    BuildRequest buildRequest = new BuildRequest()
 //    buildRequest.appConfig = conf
