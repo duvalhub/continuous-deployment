@@ -12,6 +12,9 @@ dockerSlave() {
   sh "git --version"
   echo "Hello from pipeline"
 
+  sh "env"
+  sh "env | grep GIT"
+  return
     initializeWorkdirStage()
 
     conf = readConfiguration()
