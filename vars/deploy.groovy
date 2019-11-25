@@ -3,7 +3,7 @@ import com.duvalhub.AppConfig
 
 def call(DeployRequest request) {
   stage('Build And Push to remote') {
-    AppConfig appConfig
+    AppConfig appConfig = request.appConfig
     String appName = request.appName
     //String image = request.image
     String version = request.version
