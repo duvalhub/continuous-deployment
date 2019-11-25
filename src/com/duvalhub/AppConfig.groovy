@@ -10,6 +10,9 @@ class AppConfig extends BaseObject {
     String getDockerImage(){
         return "${this.docker.registry}/${this.docker.namespace}/${this.docker.repository}"
     }
+     String getDockerImage(String version){
+        return "${this.getDockerImage()}:version"
+    }
 }
 
 class App {
