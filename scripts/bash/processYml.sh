@@ -6,17 +6,17 @@ missing_param() {
     exit 1
 }
 
-if [ -z $1 ]:
+if [ -z $1 ];
 then
     missing_param "1, you need to provide a path to a file to output"
 fi
 
-if [ -z $APP_NAME ]:
+if [ -z $APP_NAME ];
 then
     missing_param APP_NAME
 fi
 
-if [ -z $IMAGE ]:
+if [ -z $IMAGE ];
 then
     missing_param IMAGE
 fi
