@@ -8,7 +8,7 @@ class DeployRequest extends BaseObject {
     String image
 
     DeployRequest(AppConfig appConfig, String version) {
-        echo "we are hrer"
+        println "we are hrer"
         this.appName = appConfig.app.name
         this.image = appConfig.getDockerImage(version)
     }
