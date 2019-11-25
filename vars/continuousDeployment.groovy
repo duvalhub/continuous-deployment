@@ -22,7 +22,8 @@ def call() {
       build(buildRequest)
     }
 
-    if ( true || processBranchNameResponse.doDeploy ) {
+
+    if ( processBranchNameResponse.doDeploy ) {
       echo "### Deploying app in '${processBranchNameResponse.deployEnv} version '${processBranchNameResponse.version}'"
       DeployRequest deployRequest = new DeployRequest(conf, processBranchNameResponse.version)
       deploy(deployRequest)
