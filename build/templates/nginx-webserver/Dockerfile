@@ -7,7 +7,7 @@ COPY public ./public
 RUN npm run build
 
 FROM nginx
-EXPOSE 8080
+EXPOSE 80
 ARG TEMPLATE_PATH=.
 WORKDIR /etc/nginx
 COPY --from=builder /tmp/dockerbuild/build /usr/share/frontend/html
