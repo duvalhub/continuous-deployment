@@ -45,7 +45,7 @@ end(){
 
     #docker run --rm -d --name "$CONTAINER" mikefarah/yq /bin/sh -c "while :; do echo sleep 1; done"
     docker ps | grep "$CONTAINER"
-    drun /bin/sh -c 'yq n version "3.8" > "$TMP_YML"''
+    drun /bin/sh -c 'yq n version "3.8" > "$TMP_YML"'
     #docker run --rm -v ${PWD}:/workdir mikefarah/yq pwd
 
     runyp w -i "$TMP_YML" "$BASE_PATH.image" "$IMAGE"
