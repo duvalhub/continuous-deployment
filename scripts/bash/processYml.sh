@@ -26,7 +26,7 @@ echo "### Creating docker-compose.yml file named '$1'..."
 CONTAINER=$(docker run --rm -d --name "$CONTAINER" mikefarah/yq /bin/sh -c "while :; do echo sleep 1; done")
 
 drun(){
-    docker exec -it "$CONTAINER" "$@"
+    docker exec -t "$CONTAINER" "$@"
 }
 runyp(){
     drun yq "$@"
