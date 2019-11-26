@@ -7,13 +7,11 @@ def call(DeployRequest request) {
     String appName = request.appName
     //String image = request.image
     String version = request.version
-    String compose = "docker-compose.yml"
 
-    def processScript = "${env.PIPELINE_WORKDIR}/scripts/bash/processYml.sh"
+    WriteComposeRequest writeComposeRequest = new WriteComposeRequest(appName, version)
+    String composeFile = writeCompose(writeComposeRequest)
 
-    env.APP_NAME = appName
-    env.IMAGE = appConfig.getDockerImage(version)
-    sh "chmod +x ${processScript} && ${processScript} $compose"
+    sh "docker stack deploy -c composeFile toto-stack"
 
   }
 }
