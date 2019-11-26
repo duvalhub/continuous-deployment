@@ -4,7 +4,7 @@ import com.duvalhub.BaseObject
 import groovy.json.JsonBuilder
 
 class WriteComposeRequest extends BaseObject {
-    String scriptPath = "scrips/bash/processYml.sh"
+    String scriptPath = "scripts/bash/processYml.sh"
     String compose = "docker-compose.yml"
     String appName
     String image
