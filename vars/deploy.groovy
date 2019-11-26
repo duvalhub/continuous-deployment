@@ -8,8 +8,8 @@ def call(DeployRequest request) {
     String appName = request.appName
     //String image = request.image
     String version = request.version
-
-    WriteComposeRequest writeComposeRequest = new WriteComposeRequest(appName, version)
+    def image = appConfig.getDockerImage(version)
+    WriteComposeRequest writeComposeRequest = new WriteComposeRequest(appName, image)
     String composeFile = writeCompose(writeComposeRequest)
 
     sh "docker stack deploy -c composeFile toto-stack"
