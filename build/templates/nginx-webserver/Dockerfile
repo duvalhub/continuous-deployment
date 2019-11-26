@@ -8,9 +8,10 @@ RUN npm run build
 
 FROM nginx
 EXPOSE 80
+ARG TEMPLATE_PATH=.
 WORKDIR /etc/nginx
 COPY --from=builder /tmp/dockerbuild/build /usr/share/frontend/html
-COPY ./docker/nginx.conf /etc/nginx/conf.d/default.conf
-COPY ./docker/init_container.sh ./
+COPY ${TEMPLATE_PATH}/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ${TEMPLATE_PATH}/init_container.sh ./
 ENTRYPOINT [ "/bin/bash", "init_container.sh", "/etc/nginx/conf.d/default.conf" ]
 CMD ["nginx", "-g", "daemon off;"]
