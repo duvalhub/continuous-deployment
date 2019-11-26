@@ -12,7 +12,7 @@ def call(DeployRequest request) {
     WriteComposeRequest writeComposeRequest = new WriteComposeRequest(appName, image)
     String composeFile = writeCompose(writeComposeRequest)
 
-    sh "docker stack deploy -c composeFile toto-stack"
+    sh "docker stack deploy -c ${composeFile} toto-stack"
 
   }
 }
