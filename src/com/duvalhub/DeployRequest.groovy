@@ -14,6 +14,5 @@ class DeployRequest extends BaseObject {
         this.appName = appConfig.app.name
         this.appConfig = appConfig
         this.version = version
-        //this.image = appConfig.getDockerImage(version)
     }
 }

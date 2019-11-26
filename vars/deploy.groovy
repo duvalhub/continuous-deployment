@@ -6,7 +6,6 @@ def call(DeployRequest request) {
   stage('Build And Push to remote') {
     AppConfig appConfig = request.appConfig
     String appName = request.appName
-    //String image = request.image
     String version = request.version
     def image = appConfig.getDockerImage(version)
     WriteComposeRequest writeComposeRequest = new WriteComposeRequest(appName, image)

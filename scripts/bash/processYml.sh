@@ -36,25 +36,16 @@ end(){
 }
 
 { # Try
-    #TMP_YML=$(mktemp yml.XXXXXX)
     TMP_YML=$1
-
-    #cat "$YML_FILE" >> "$TMP_YML"
 
     BASE_PATH="services.$APP_NAME"
 
-    #docker run --rm -d --name "$CONTAINER" mikefarah/yq /bin/sh -c "while :; do echo sleep 1; done"
-    docker ps | grep "$CONTAINER"
-
     drun /bin/sh -c 'yq n version \"3.8\" > '"$TMP_YML"
-    #docker run --rm -v ${PWD}:/workdir mikefarah/yq pwd
-
     runyp w -i "$TMP_YML" "$BASE_PATH.image" "$IMAGE"
     runyp w -i "$TMP_YML" "$BASE_PATH.ports[+]" "8080:8080"
     runyp w -i "$TMP_YML" "$BASE_PATH.ports[+]" "80:80"
 
     drun cat $TMP_YML > $TMP_YML
-
     end
     echo "### Creating success! Done!"
 } || {
