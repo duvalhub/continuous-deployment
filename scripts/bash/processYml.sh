@@ -50,7 +50,7 @@ end(){
     #docker run --rm -v ${PWD}:/workdir mikefarah/yq pwd
 
     runyp w -i "$TMP_YML" "$BASE_PATH.image" "$IMAGE"
-    runyp w -i "$TMP_YML" "$BASE_PATH.ports[+]" "8080:8080"
+    runyp w -i "$TMP_YML" "$BASE_PATH.ports[+]" "8080:80"
 
     drun cat $TMP_YML > $TMP_YML
 
