@@ -42,10 +42,20 @@ end(){
 
     drun /bin/sh -c 'yq n version \"3.8\" > '"$TMP_YML"
     runyp w -i "$TMP_YML" "$BASE_PATH.image" "$IMAGE"
-    runyp w -i "$TMP_YML" "$BASE_PATH.ports[+]" "8080:8080"
-    runyp w -i "$TMP_YML" "$BASE_PATH.ports[+]" "80:80"
+    runyp w -i "$TMP_YML" "$BASE_PATH.environment[+]" "VIRTUAL_HOST=hello-world.test.dev.philippeduval.ca"
+    runyp w -i "$TMP_YML" "$BASE_PATH.environment[+]" "LETSENCRYPT_HOST=hello-world.test.dev.philippeduval.ca"
+
+#    --env "VIRTUAL_HOST=othersubdomain.yourdomain.tld" \
+#    --env "VIRTUAL_PORT=3000" \
+#    --env "LETSENCRYPT_HOST=othersubdomain.yourdomain.tld" \
+#    --env "LETSENCRYPT_EMAIL=mail@yourdomain.tld" \
+
+#    runyp w -i "$TMP_YML" "$BASE_PATH.ports[+]" "8080:8080"
+#    runyp w -i "$TMP_YML" "$BASE_PATH.ports[+]" "80:80"
 
     drun cat $TMP_YML > $TMP_YML
+    echo "### Result : "
+    cat "$TMP_YML\n"
     end
     echo "### Creating success! Done!"
 } || {
