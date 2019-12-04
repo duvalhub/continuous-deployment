@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+
 set -e
 #while [ "$#" -gt 0 ]; do
 #  case "$1" in
