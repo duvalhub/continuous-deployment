@@ -7,4 +7,6 @@ RUN npm install
 COPY src ./src
 COPY public ./public
 RUN ${BUILD_COMMAND}
+RUN echo ${BUILD_DIRECTORY}
+RUN echo ${BUILD_DEST}
 RUN mkdir -p ${BUILD_DIRECTORY} && mv ${BUILD_DEST} ${BUILD_DIRECTORY}
