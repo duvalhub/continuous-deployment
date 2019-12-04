@@ -6,6 +6,7 @@ import groovy.json.JsonBuilder
 class AppConfig extends BaseObject {
     App app
     Docker docker
+    Epais unpais
 
     String getDockerImage(){
         return "${this.docker.registry}/${this.docker.namespace}/${this.docker.repository}"
@@ -14,7 +15,9 @@ class AppConfig extends BaseObject {
         return "${this.getDockerImage()}:${version}"
     }
 }
-
+class Epais {
+    String unpais
+}
 class App {
     String name
     String type
