@@ -1,27 +1,27 @@
 #!/bin/sh
 set -e
-while [ "$#" -gt 0 ]; do
-  case "$1" in
-    -n) name="$2"; shift 2;;
-    -p) pidfile="$2"; shift 2;;
-    -l) logfile="$2"; shift 2;;
+#while [ "$#" -gt 0 ]; do
+#  case "$1" in
+#    -n) name="$2"; shift 2;;
+#    -p) pidfile="$2"; shift 2;;
+#    -l) logfile="$2"; shift 2;;
+#
+#    --templates=*) templates="${1#*=}"; shift 1;;
+#    --builder=*) builder="${1#*=}"; shift 1;;
+#    --container=*) container="${1#*=}"; shift 1;;
+#    --templates|--builder|--container) echo "$1 requires an argument" >&2; exit 1;;
+#
+#    -*) echo "unknown option: $1" >&2; exit 1;;
+#    *) handle_argument "$1"; shift 1;;
+#  esac
+#done
 
-    --templates=*) templates="${1#*=}"; shift 1;;
-    --builder=*) builder="${1#*=}"; shift 1;;
-    --container=*) container="${1#*=}"; shift 1;;
-    --templates|--builder|--container) echo "$1 requires an argument" >&2; exit 1;;
-
-    -*) echo "unknown option: $1" >&2; exit 1;;
-    *) handle_argument "$1"; shift 1;;
-  esac
-done
-
-#while [[ "$#" -gt 0 ]]; do case $1 in
-#  -t|--templates) templates="$2"; shift;;
-#  -b|--builder) builder="$2"; shift;;
-#  -c|--container) container="$2"; shift;;
-#  *) echo "Unknown parameter passed: $1"; exit 1;;
-#esac; shift; done
+while [[ "$#" -gt 0 ]]; do case $1 in
+  -t|--templates) templates="$2"; shift;;
+  -b|--builder) builder="$2"; shift;;
+  -c|--container) container="$2"; shift;;
+  *) echo "Unknown parameter passed: $1"; exit 1;;
+esac; shift; done
 
 echo "### Builder: '$builder', Container: '$container'"
 DOCKERFILE=$(mktemp)
