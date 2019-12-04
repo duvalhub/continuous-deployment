@@ -2,7 +2,7 @@ import com.duvalhub.BuildRequest
 import com.duvalhub.AppConfig
 
 def call(BuildRequest buildRequest) {
-  stage('Build And Push to remote') {
+  stage('Build') {
     AppConfig conf = buildRequest.appConfig
     def appType = conf.app.type
     String version = buildRequest.version

@@ -3,7 +3,7 @@ import com.duvalhub.AppConfig
 import com.duvalhub.WriteComposeRequest
 
 def call(DeployRequest request) {
-  stage('Build And Push to remote') {
+  stage('Deploy') {
     AppConfig appConfig = request.appConfig
     String appName = request.appName
     String version = request.version

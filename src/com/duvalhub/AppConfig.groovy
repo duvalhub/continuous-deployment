@@ -18,7 +18,7 @@ class AppConfig extends BaseObject {
 class App {
     String name
     String type
-    String gros
+    String gros = "whatup"
 }
 
 class Docker {
