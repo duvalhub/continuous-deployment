@@ -20,7 +20,7 @@ def call(BuildRequest buildRequest) {
 
     def appBasePath =  "${env.APP_WORKDIR}/app"
     dir(appBasePath) {
-      sh "chmod +x ${script} && ${script} --templates $TEMPLATE_PATH --builder ${conf.build.builder} --container ${conf.build.container}"
+      sh "chmod +x ${script} && bash -c \"${script} --templates $TEMPLATE_PATH --builder ${conf.build.builder} --container ${conf.build.container}\""
     }
 
   }
