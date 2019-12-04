@@ -13,14 +13,14 @@ def call(BuildRequest buildRequest) {
 
     def basePath = "${env.PIPELINE_WORKDIR}"
 
-    env.TEMPLATE_PATH = "${basePath}/build/templates/${appType}"
+    env.TEMPLATE_PATH = "${basePath}/build/templates"
     env.DOCKERFILE_PATH = "${env.TEMPLATE_PATH}/Dockerfile"
 
     def script = "${basePath}/scripts/bash/build.sh"
 
     def appBasePath =  "${env.APP_WORKDIR}/app"
     dir(appBasePath) {
-      sh "chmod +x ${script} && ${script}"
+      sh "chmod +x ${script} && ${script} --templates $TEMPLATE_PATH --builder ${conf.build.builder} --container ${conf.build.container}"
     }
 
   }
