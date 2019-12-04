@@ -44,8 +44,8 @@ end(){
     drun /bin/sh -c 'yq n networks.reverseproxy.external true >> '"$TMP_YML"
     runyp w -i "$TMP_YML" "networks.reverseproxy.name" "reverseproxy"
     runyp w -i "$TMP_YML" "$BASE_PATH.image" "$IMAGE"
-    runyp w -i "$TMP_YML" "$BASE_PATH.environment[+]" "VIRTUAL_HOST=hello-world.test.dev.philippeduval.ca"
-    runyp w -i "$TMP_YML" "$BASE_PATH.environment[+]" "LETSENCRYPT_HOST=hello-world.test.dev.philippeduval.ca"
+    runyp w -i "$TMP_YML" "$BASE_PATH.environment[+]" "VIRTUAL_HOST=hello-world.fuck.dev.philippeduval.ca"
+    runyp w -i "$TMP_YML" "$BASE_PATH.environment[+]" "LETSENCRYPT_HOST=hello-world.fuck.dev.philippeduval.ca"
     runyp w -i "$TMP_YML" "$BASE_PATH.networks[+]" "reverseproxy"
 
 
