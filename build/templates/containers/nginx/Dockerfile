@@ -1,5 +1,6 @@
 ARG public_folder
 
 FROM nginx:alpine
+ARG shared_directory
 EXPOSE 80
-COPY --from=builder ${BUILD_DIRECTORY}  /usr/share/nginx/html
+COPY --from=builder ${shared_directory}  /usr/share/nginx/html
