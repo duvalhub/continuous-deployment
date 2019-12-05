@@ -22,10 +22,12 @@ class WriteComposeRequest extends BaseObject {
     }
 
     String getImage() {
-        return request.getDockerImage()
+        return this.request.getDockerImage()
     }
 
     String getHosts() {
+        String urls = "${this.appName}"
+        println(urls)
         return "hellow-wrol.pd.ca"
         String urls = "${this.appName}.${this.config.app.group}.${this.request.environment}.${this.base}"
 
