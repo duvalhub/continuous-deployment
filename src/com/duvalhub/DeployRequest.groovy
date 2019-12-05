@@ -8,11 +8,16 @@ class DeployRequest extends BaseObject {
     String appName
     String image
     String version
+    String environment
 
-    DeployRequest(AppConfig appConfig, String version) {
-        println "we are hrer"
-        this.appName = appConfig.app.name
+    DeployRequest(AppConfig appConfig, String version, String environment) {
         this.appConfig = appConfig
+        this.appName = appConfig.app.name
         this.version = version
+        this.environment = environment
+    }
+
+    String getStackName(){
+        return "${this.appConfig.app.group}-${this.environment}"
     }
 }

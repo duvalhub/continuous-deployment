@@ -9,7 +9,7 @@ def call(DeployRequest request) {
     String composeFile = writeCompose(writeComposeRequest)
 
     sh "cat ${composeFile}"
-    sh "docker stack deploy -c ${composeFile} toto-stack"
+    sh "docker stack deploy -c ${composeFile} ${request.getStackName()}"
 
   }
 }
