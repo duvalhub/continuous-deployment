@@ -38,9 +38,9 @@ class WriteComposeRequest extends BaseObject {
 
   //      def urls = "${this.appName}.${this.config.app.group}.${this.request.environment}.${this.base}"
         
-//        if(this.hosts) {
- //           urls = urls + this.hosts
-//        }
+        if(this.hosts) {
+           urls += this.hosts
+        }
 
         return urls
         
