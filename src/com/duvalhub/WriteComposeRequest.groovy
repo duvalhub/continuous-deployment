@@ -26,9 +26,14 @@ class WriteComposeRequest extends BaseObject {
     }
 
     String getHosts() {
-        String urls = "${this.appName}"
+        String urls = "${this.appName}.${this.config.app.group}.${this.request.environment}.${this.base}"
+
         println(urls)
         return "hellow-wrol.pd.ca"
+        
+    }
+
+    void toto() {
         String urls = "${this.appName}.${this.config.app.group}.${this.request.environment}.${this.base}"
 
         if(this.hosts) {
