@@ -10,4 +10,4 @@ RUN ${BUILD_COMMAND}
 RUN echo ${BUILD_DIRECTORY}
 RUN echo ${BUILD_DEST}
 ARG shared_directory
-RUN mkdir -p ${shared_directory} && mv ${BUILD_DEST} ${shared_directory}
+RUN mkdir -p ${shared_directory} && rm -r ${shared_directory} && mv ${BUILD_DEST} ${shared_directory}
