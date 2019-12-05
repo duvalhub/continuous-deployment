@@ -23,7 +23,7 @@ fi
 
 echo "### Creating docker-compose.yml file named '$1'..."
 
-CONTAINER=$(docker run --rm -d --name "$CONTAINER" mikefarah/yq /bin/sh -c "while :; do echo sleep 1; done")
+#CONTAINER=$(docker run --rm -d --name "$CONTAINER" mikefarah/yq /bin/sh -c "while :; do echo sleep 1; done")
 
 drun(){
     docker exec -t "$CONTAINER" "$@"
@@ -40,13 +40,14 @@ end(){
 
     BASE_PATH="services.$APP_NAME"
 
-    drun /bin/sh -c 'yq n version \"3.8\" > '"$TMP_YML"
-    drun /bin/sh -c 'yq n networks.reverseproxy.external true >> '"$TMP_YML"
-    runyp w -i "$TMP_YML" "networks.reverseproxy.name" "reverseproxy"
-    runyp w -i "$TMP_YML" "$BASE_PATH.image" "$IMAGE"
-    runyp w -i "$TMP_YML" "$BASE_PATH.environment[+]" "VIRTUAL_HOST=$HOSTS"
-    runyp w -i "$TMP_YML" "$BASE_PATH.environment[+]" "LETSENCRYPT_HOST=$HOSTS"
-    runyp w -i "$TMP_YML" "$BASE_PATH.networks[+]" "reverseproxy"
+    yq n version \"3.8\" > "$TMP_YML"
+    yq n networks.reverseproxy.external true >> "$TMP_YML"
+
+    yq w -i "$TMP_YML" "networks.reverseproxy.name" "reverseproxy"
+    yq w -i "$TMP_YML" "$BASE_PATH.image" "$IMAGE"
+    yq w -i "$TMP_YML" "$BASE_PATH.environment[+]" "VIRTUAL_HOST=$HOSTS"
+    yq w -i "$TMP_YML" "$BASE_PATH.environment[+]" "LETSENCRYPT_HOST=$HOSTS"
+    yq w -i "$TMP_YML" "$BASE_PATH.networks[+]" "reverseproxy"
 
     drun cat $TMP_YML > $TMP_YML
     echo "### Result : "
