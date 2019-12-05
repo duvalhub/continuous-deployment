@@ -4,7 +4,6 @@ import com.duvalhub.AppConfig
 def call(BuildRequest buildRequest) {
   stage('Build') {
     AppConfig conf = buildRequest.appConfig
-    def appType = conf.app.type
     String version = buildRequest.version
     String image = conf.getDockerImage()
     
