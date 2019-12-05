@@ -33,11 +33,13 @@ cat "$templates/containers/$container/Dockerfile" >> $DOCKERFILE
 
 echo "### Dockerfile :"
 cat $DOCKERFILE | sed -e 's/^/   /'
-
+echo "### Version"
 docker version
-
+echo "### Building"
 docker build --build-arg shared_directory=$(mktemp) -t "$IMAGE" -f $DOCKERFILE .
+echo "### Login in"
 echo "$DOCKER_CREDENTIALS_PSW" | docker login --username "$DOCKER_CREDENTIALS_USR" --password-stdin 2> /dev/null
+echo "### Pushing"
 docker push "$IMAGE"
 
 exit
