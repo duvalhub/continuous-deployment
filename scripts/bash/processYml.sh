@@ -25,16 +25,6 @@ echo "### Creating docker-compose.yml file named '$1'..."
 
 #CONTAINER=$(docker run --rm -d --name "$CONTAINER" mikefarah/yq /bin/sh -c "while :; do echo sleep 1; done")
 
-drun(){
-    docker exec -t "$CONTAINER" "$@"
-}
-runyp(){
-    drun yq "$@"
-}
-end(){
-    docker stop $CONTAINER > /dev/null &
-}
-
 { # Try
     TMP_YML=$1
 
@@ -49,12 +39,8 @@ end(){
     yq w -i "$TMP_YML" "$BASE_PATH.environment[+]" "LETSENCRYPT_HOST=$HOSTS"
     yq w -i "$TMP_YML" "$BASE_PATH.networks[+]" "reverseproxy"
 
-    drun cat $TMP_YML > $TMP_YML
     echo "### Result : "
     cat "$TMP_YML"
     echo
-    end
     echo "### Creating success! Done!"
-} || {
-    end
-}
+} 
