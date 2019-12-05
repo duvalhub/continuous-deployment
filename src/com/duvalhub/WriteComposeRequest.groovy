@@ -13,7 +13,7 @@ class WriteComposeRequest extends BaseObject {
     WriteComposeRequest(DeployRequest request, AppConfig config) {
         this.appName = config.app.name
         String version = request.version
-        this.image = config.getDockerImage(request.version)
+        this.image = request.getDockerImage()
         this.hosts = config.deploy.hosts
     }
 

@@ -17,6 +17,10 @@ class DeployRequest extends BaseObject {
         this.environment = environment
     }
 
+    String getDockerImage() {
+        return "${appConfig.getDockerImage()}:${this.version}"
+    }
+
     String getStackName(){
         return "${this.appConfig.app.group}-${this.environment}"
     }
