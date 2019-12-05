@@ -1,6 +1,7 @@
 package com.duvalhub
 
 import com.duvalhub.BaseObject
+import com.duvalhub.AppConfig
 import groovy.json.JsonBuilder
 
 class WriteComposeRequest extends BaseObject {
@@ -10,9 +11,9 @@ class WriteComposeRequest extends BaseObject {
     String image
     String hosts
 
-    WriteComposeRequest(DeployRequest request, AppConfig config) {
+    WriteComposeRequest(DeployRequest request) {
+        AppConfig config = request.appConfig
         this.appName = config.app.name
-        String version = request.version
         this.image = request.getDockerImage()
         this.hosts = config.deploy.hosts
     }

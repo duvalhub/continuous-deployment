@@ -3,7 +3,7 @@ import com.duvalhub.WriteComposeRequest
 
 def call(DeployRequest request) {
   stage('Deploy') {
-    WriteComposeRequest writeComposeRequest = new WriteComposeRequest(request.appConfig, request.version)
+    WriteComposeRequest writeComposeRequest = new WriteComposeRequest(request)
     String composeFilePath = writeCompose(writeComposeRequest)
 
     sh "cat ${composeFilePath}"
