@@ -48,15 +48,6 @@ end(){
     runyp w -i "$TMP_YML" "$BASE_PATH.environment[+]" "LETSENCRYPT_HOST=$HOSTS"
     runyp w -i "$TMP_YML" "$BASE_PATH.networks[+]" "reverseproxy"
 
-
-#    --env "VIRTUAL_HOST=othersubdomain.yourdomain.tld" \
-#    --env "VIRTUAL_PORT=3000" \
-#    --env "LETSENCRYPT_HOST=othersubdomain.yourdomain.tld" \
-#    --env "LETSENCRYPT_EMAIL=mail@yourdomain.tld" \
-
-#    runyp w -i "$TMP_YML" "$BASE_PATH.ports[+]" "8080:8080"
-#    runyp w -i "$TMP_YML" "$BASE_PATH.ports[+]" "80:80"
-
     drun cat $TMP_YML > $TMP_YML
     echo "### Result : "
     cat "$TMP_YML"

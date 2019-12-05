@@ -5,9 +5,6 @@ import com.duvalhub.WriteComposeRequest
 def call(DeployRequest request) {
   stage('Deploy') {
     AppConfig appConfig = request.appConfig
-    String appName = request.appName
-    String version = request.version
-    def image = appConfig.getDockerImage(version)
     WriteComposeRequest writeComposeRequest = new WriteComposeRequest(allConfig, version)
     String composeFile = writeCompose(writeComposeRequest)
 
