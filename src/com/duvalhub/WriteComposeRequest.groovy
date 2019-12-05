@@ -30,7 +30,7 @@ class WriteComposeRequest extends BaseObject {
         
 
         if(this.hosts) {
-            urls = urls + this.hosts
+            //urls = urls + this.hosts
         }
 
         println("#######################################")
