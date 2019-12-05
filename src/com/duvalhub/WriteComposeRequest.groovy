@@ -28,9 +28,10 @@ class WriteComposeRequest extends BaseObject {
     String getHosts() {
         String urls = "${this.appName}.${this.config.app.group}.${this.request.environment}.${this.base}"
         
-        //urls = "${urls},${this.hosts}"
 
-//        if(this.hosts) {}
+        if(this.hosts) {
+            urls = urls + this.hosts
+        }
 
         println("#######################################")
         println(urls)
