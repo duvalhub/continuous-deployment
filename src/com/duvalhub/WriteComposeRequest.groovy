@@ -6,6 +6,7 @@ import groovy.json.JsonBuilder
 
 class WriteComposeRequest extends BaseObject {
     DeployRequest request
+    String base = "philippeduval.ca"
     String scriptPath = "scripts/bash/processYml.sh"
     String compose = "docker-compose.yml"
     String appName
@@ -21,6 +22,15 @@ class WriteComposeRequest extends BaseObject {
 
     String getImage() {
         return request.getDockerImage()
+    }
+
+    String getHosts() {
+        String hosts = "${this.appName}.${this.request.appConfig.app.group}.${this.request.environment}.${this.base}"
+
+        if(this.hosts) {
+            hosts += ",${this.hosts}"
+        }
+        return hosts
     }
 
 }
