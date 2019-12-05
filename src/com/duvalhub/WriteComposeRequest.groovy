@@ -17,8 +17,8 @@ class WriteComposeRequest extends BaseObject {
     WriteComposeRequest(DeployRequest request) {
         this.request = request
         this.config = request.appConfig
-        this.appName = config.config.app.name
-        this.hosts = config.config.deploy.hosts
+        this.appName = this.config.app.name
+        this.hosts = this.config.deploy.hosts
     }
 
     String getImage() {
