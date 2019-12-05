@@ -6,7 +6,6 @@ import groovy.json.JsonBuilder
 class AppConfig extends BaseObject {
     App app
     Docker docker
-    Epais unpais
     Build build
     Deploy deploy
 
@@ -14,8 +13,9 @@ class AppConfig extends BaseObject {
         return "${this.docker.registry}/${this.docker.namespace}/${this.docker.repository}"
     }
 }
-class Epais {
-    String unpais
+class App {
+    String name
+    String group
 }
 class Build {
     String builder
@@ -24,12 +24,6 @@ class Build {
 class Deploy {
     String hosts
 }
-class App {
-    String name
-    String type
-    String gros = "whatup"
-}
-
 class Docker {
     String registry
     String namespace
