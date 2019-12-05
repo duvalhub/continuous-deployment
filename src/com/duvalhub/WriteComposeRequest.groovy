@@ -8,10 +8,13 @@ class WriteComposeRequest extends BaseObject {
     String compose = "docker-compose.yml"
     String appName
     String image
+    String hosts
 
-    WriteComposeRequest(String appName, String image) {
-        this.appName = appName
-        this.image = image
+    WriteComposeRequest(DeployRequest request, AppConfig config, String version) {
+        this.appName = config.app.name
+        String version = request.version
+        this.image = config.getDockerImage(request.version)
+        this.hosts = config.deploy.hosts
     }
 
 }

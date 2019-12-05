@@ -8,6 +8,7 @@ class AppConfig extends BaseObject {
     Docker docker
     Epais unpais
     Build build
+    Deploy deploy
 
     String getDockerImage(){
         return "${this.docker.registry}/${this.docker.namespace}/${this.docker.repository}"
@@ -22,6 +23,9 @@ class Epais {
 class Build {
     String builder
     String container
+}
+class Deploy {
+    String hosts
 }
 class App {
     String name

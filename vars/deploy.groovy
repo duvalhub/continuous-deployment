@@ -8,7 +8,7 @@ def call(DeployRequest request) {
     String appName = request.appName
     String version = request.version
     def image = appConfig.getDockerImage(version)
-    WriteComposeRequest writeComposeRequest = new WriteComposeRequest(appName, image)
+    WriteComposeRequest writeComposeRequest = new WriteComposeRequest(allConfig, version)
     String composeFile = writeCompose(writeComposeRequest)
 
     sh "cat ${composeFile}"
