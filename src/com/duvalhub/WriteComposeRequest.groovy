@@ -27,7 +27,7 @@ class WriteComposeRequest extends BaseObject {
         return this.request.getDockerImage()
     }
 
-    String getHosts() {
+    String getDomainNames() {
         def name = this.appName
         def group = this.config.app.group
         def env = this.request.environment
