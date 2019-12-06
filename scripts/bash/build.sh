@@ -28,9 +28,9 @@ esac; shift; done
 echo "### Builder: '$builder', Container: '$container', BuildDestination: '$build_destination'"
 DOCKERFILE=$(mktemp)
 
-echo "ARG BUILD_DIRECTORY=\"/build/dest\"" > $DOCKERFILE
-echo "" >> $DOCKERFILE
-cat "$templates/builders/$builder/Dockerfile" >> $DOCKERFILE
+#echo "ARG BUILD_DIRECTORY=\"/build/dest\"" > $DOCKERFILE
+#echo "" >> $DOCKERFILE
+cat "$templates/builders/$builder/Dockerfile" > $DOCKERFILE
 echo "" >> $DOCKERFILE
 cat "$templates/containers/$container/Dockerfile" >> $DOCKERFILE
 
@@ -39,7 +39,7 @@ cat $DOCKERFILE | sed -e 's/^/   /'
 echo "### Version"
 docker version
 echo "### Building"
-docker build --build-arg build_directory=$(mktemp) --build-arg build_destination -t "$IMAGE" -f $DOCKERFILE .
+docker build --build-arg build_directory=$(mktemp) --build-arg build_destination=$build_destination -t "$IMAGE" -f $DOCKERFILE .
 echo "### Login in"
 echo "$DOCKER_CREDENTIALS_PSW" | docker login --username "$DOCKER_CREDENTIALS_USR" --password-stdin
 echo "### Pushing"
