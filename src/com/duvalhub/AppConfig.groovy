@@ -19,6 +19,7 @@ class App {
 }
 class Build {
     String builder
+    String destination = "build"
     String container
 }
 class Deploy {
