@@ -23,31 +23,20 @@ fi
 
 echo "### Creating docker-compose.yml file named '$1'..."
 
-CONTAINER=$(docker run --rm -d --name "$CONTAINER" mikefarah/yq /bin/sh -c "while :; do echo sleep 1; done")
+TMP_YML=$1
 
-drun(){
-    docker exec -t "$CONTAINER" "$@"
-}
-runyp(){
-    drun yq "$@"
-}
-end(){
-    docker stop $CONTAINER > /dev/null &
-}
+BASE_PATH="services.$APP_NAME"
 
-{ # Try
-    TMP_YML=$1
+yq n version \"3.8\" > "$TMP_YML"
+yq n networks.reverseproxy.external true >> "$TMP_YML"
 
-    BASE_PATH="services.$APP_NAME"
+yq w -i "$TMP_YML" "networks.reverseproxy.name" "reverseproxy"
+yq w -i "$TMP_YML" "$BASE_PATH.image" "$IMAGE"
+yq w -i "$TMP_YML" "$BASE_PATH.environment[+]" "VIRTUAL_HOST=$HOSTS"
+yq w -i "$TMP_YML" "$BASE_PATH.environment[+]" "LETSENCRYPT_HOST=$HOSTS"
+yq w -i "$TMP_YML" "$BASE_PATH.networks[+]" "reverseproxy"
 
-    drun /bin/sh -c 'yq n version \"3.8\" > '"$TMP_YML"
-    runyp w -i "$TMP_YML" "$BASE_PATH.image" "$IMAGE"
-    runyp w -i "$TMP_YML" "$BASE_PATH.ports[+]" "8080:8080"
-    runyp w -i "$TMP_YML" "$BASE_PATH.ports[+]" "80:80"
-
-    drun cat $TMP_YML > $TMP_YML
-    end
-    echo "### Creating success! Done!"
-} || {
-    end
-}
+echo "### Result : "
+cat "$TMP_YML"
+echo
+echo "### Creating success! Done!"

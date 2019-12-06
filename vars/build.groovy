@@ -2,9 +2,8 @@ import com.duvalhub.BuildRequest
 import com.duvalhub.AppConfig
 
 def call(BuildRequest buildRequest) {
-  stage('Build And Push to remote') {
+  stage('Build') {
     AppConfig conf = buildRequest.appConfig
-    def appType = conf.app.type
     String version = buildRequest.version
     String image = conf.getDockerImage()
     
@@ -13,14 +12,14 @@ def call(BuildRequest buildRequest) {
 
     def basePath = "${env.PIPELINE_WORKDIR}"
 
-    env.TEMPLATE_PATH = "${basePath}/build/templates/${appType}"
+    env.TEMPLATE_PATH = "${basePath}/build/templates"
     env.DOCKERFILE_PATH = "${env.TEMPLATE_PATH}/Dockerfile"
 
     def script = "${basePath}/scripts/bash/build.sh"
 
     def appBasePath =  "${env.APP_WORKDIR}/app"
     dir(appBasePath) {
-      sh "chmod +x ${script} && ${script}"
+      sh "chmod +x ${script} && bash -c \"${script} --templates $TEMPLATE_PATH --builder ${conf.build.builder} --container ${conf.build.container}\""
     }
 
   }

@@ -1,18 +1,13 @@
 import com.duvalhub.DeployRequest
-import com.duvalhub.AppConfig
 import com.duvalhub.WriteComposeRequest
 
 def call(DeployRequest request) {
-  stage('Build And Push to remote') {
-    AppConfig appConfig = request.appConfig
-    String appName = request.appName
-    String version = request.version
-    def image = appConfig.getDockerImage(version)
-    WriteComposeRequest writeComposeRequest = new WriteComposeRequest(appName, image)
-    String composeFile = writeCompose(writeComposeRequest)
+  stage('Deploy') {
+    WriteComposeRequest writeComposeRequest = new WriteComposeRequest(request)
+    String composeFilePath = writeCompose(writeComposeRequest)
 
-    sh "cat ${composeFile}"
-    sh "docker stack deploy -c ${composeFile} toto-stack"
+    sh "cat ${composeFilePath}"
+    sh "docker stack deploy -c ${composeFilePath} ${request.getStackName()}"
 
   }
 }
