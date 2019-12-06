@@ -36,7 +36,7 @@ cat $DOCKERFILE | sed -e 's/^/   /'
 echo "### Version"
 docker version
 echo "### Building"
-docker build --build-arg shared_directory=$(mktemp) -t "$IMAGE" -f $DOCKERFILE .
+docker build --build-arg build_directory=$(mktemp) -t "$IMAGE" -f $DOCKERFILE .
 echo "### Login in"
 echo "$DOCKER_CREDENTIALS_PSW" | docker login --username "$DOCKER_CREDENTIALS_USR" --password-stdin
 echo "### Pushing"
