@@ -29,7 +29,9 @@ echo "### Builder: '$builder', Container: '$container', BuildDestination: '$buil
 DOCKERFILE=$(mktemp)
 
 echo "ARG BUILD_DIRECTORY=\"/build/dest\"" > $DOCKERFILE
+echo "" >> $DOCKERFILE
 cat "$templates/builders/$builder/Dockerfile" >> $DOCKERFILE
+echo "" >> $DOCKERFILE
 cat "$templates/containers/$container/Dockerfile" >> $DOCKERFILE
 
 echo "### Dockerfile :"
