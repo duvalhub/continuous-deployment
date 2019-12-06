@@ -36,7 +36,7 @@ class WriteComposeRequest extends BaseObject {
         
         
         //def urls = this.appName + this.config.app.group + this.request.environment + this.base
-        def urls = ["$name", "$group", "$env", "$base"].join(".")
+        def urls = [this.appName, this.config.app.group, this.request.environment, this.base].join(".")
         //String.format("%1%s.$group.$env.$base"
 
   //      def urls = "${this.appName}.${this.config.app.group}.${this.request.environment}.${this.base}"
