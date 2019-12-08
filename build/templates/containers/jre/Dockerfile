@@ -1,0 +1,12 @@
+
+FROM openjdk:8-jdk-alpine as ping
+COPY Healthcheck.java ./
+RUN javac Healthcheck.java
+
+FROM openjdk:8-jre-alpine
+ARG JAR_FILE=target/*.jar
+COPY --from=builder ${build_directory} app.jar
+COPY --from=ping Healthcheck.class healthcheck/Healthcheck.class
+COPY init_container.sh ./
+HEALTHCHECK --interval=10s --timeout=3s CMD java healthcheck/Healthcheck localhost 8080 || exit 1
+ENTRYPOINT ["/bin/bash","init_container.sh"]
