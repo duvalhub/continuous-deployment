@@ -44,11 +44,3 @@ echo "### Login in"
 echo "$DOCKER_CREDENTIALS_PSW" | docker login --username "$DOCKER_CREDENTIALS_USR" --password-stdin
 echo "### Pushing"
 docker push "$IMAGE"
-
-exit
-
-
-mv $DOCKERFILE_PATH Dockerfile
-mv $TEMPLATE_PATH docker
-
-#/usr/bin/docker build -t "$IMAGE" .

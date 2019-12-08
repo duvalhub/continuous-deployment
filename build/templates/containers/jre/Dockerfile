@@ -1,4 +1,3 @@
-
 FROM openjdk:8-jdk-alpine as ping
 COPY Healthcheck.java ./
 RUN javac Healthcheck.java
