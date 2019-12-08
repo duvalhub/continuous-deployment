@@ -37,6 +37,11 @@ cat "$templates/builders/$builder/Dockerfile" > $DOCKERFILE
 echo "" >> $DOCKERFILE
 cat "$templates/containers/$container/Dockerfile" >> $DOCKERFILE
 
+if [ -d "$templates/containers/$container/extras" ];
+then
+  mv "$templates/containers/$container/extras/*" ./
+fi
+
 echo "### Dockerfile :"
 cat $DOCKERFILE | sed -e 's/^/   /'
 echo ""

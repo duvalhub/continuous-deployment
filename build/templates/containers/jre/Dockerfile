@@ -1,6 +1,6 @@
-#FROM openjdk:8-jdk-alpine as ping
-#COPY Healthcheck.java ./
-#RUN javac Healthcheck.java
+FROM openjdk:8-jdk-alpine as ping
+COPY Healthcheck.java ./
+RUN javac Healthcheck.java
 
 FROM openjdk:8-jre-alpine
 ARG JAR_FILE=target/*.jar
