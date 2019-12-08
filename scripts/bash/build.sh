@@ -39,7 +39,7 @@ cat "$templates/containers/$container/Dockerfile" >> $DOCKERFILE
 
 echo "### Dockerfile :"
 cat $DOCKERFILE | sed -e 's/^/   /'
-echp ""
+echo ""
 echo "### Version"
 docker version
 echo "### Building"
