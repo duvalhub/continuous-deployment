@@ -8,18 +8,24 @@ class WriteComposeRequest extends BaseObject {
     DeployRequest request
     AppConfig config
     String base = "philippeduval.ca"
-    String scriptPath = "scripts/bash/processYml.sh"
+    String scriptPath = "scripts/bash/processYml/processYml.sh"
     String compose = "docker-compose.yml"
     String appName
     String image
     String hosts
+    String port
 
     WriteComposeRequest(DeployRequest request) {
         this.request = request
         this.config = request.appConfig
         this.appName = this.config.app.name
-        if (this.config.deploy && this.config.deploy.hosts) {
-            this.hosts = this.config.deploy.hosts
+        if (this.config.deploy) {
+            if( this.config.deploy.hosts )  {
+                this.hosts = this.config.deploy.hosts
+            }
+            if ( this.config.deploy.port ) {
+                this.port = this.config.deploy.port
+            }
         }
     }
 
@@ -32,30 +38,10 @@ class WriteComposeRequest extends BaseObject {
         def group = this.config.app.group
         def env = this.request.environment
         def base = this.base
-
-        
-        
-        //def urls = this.appName + this.config.app.group + this.request.environment + this.base
         def urls = [this.appName, this.config.app.group, this.request.environment, this.base].join(".")
-        //String.format("%1%s.$group.$env.$base"
-
-  //      def urls = "${this.appName}.${this.config.app.group}.${this.request.environment}.${this.base}"
-        
         if(this.hosts) {
            urls += this.hosts
         }
-
-        return urls
-        
+        return urls        
     }
-
-    void toto() {
-        String urls = "${this.appName}.${this.config.app.group}.${this.request.environment}.${this.base}"
-
-        if(this.hosts) {
-            urls = "${urls},${this.hosts}"
-        }
-        return urls
-    }
-
 }
