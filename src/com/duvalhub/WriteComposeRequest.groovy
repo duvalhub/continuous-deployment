@@ -38,30 +38,10 @@ class WriteComposeRequest extends BaseObject {
         def group = this.config.app.group
         def env = this.request.environment
         def base = this.base
-
-        
-        
-        //def urls = this.appName + this.config.app.group + this.request.environment + this.base
         def urls = [this.appName, this.config.app.group, this.request.environment, this.base].join(".")
-        //String.format("%1%s.$group.$env.$base"
-
-  //      def urls = "${this.appName}.${this.config.app.group}.${this.request.environment}.${this.base}"
-        
         if(this.hosts) {
            urls += this.hosts
         }
-
-        return urls
-        
+        return urls        
     }
-
-    void toto() {
-        String urls = "${this.appName}.${this.config.app.group}.${this.request.environment}.${this.base}"
-
-        if(this.hosts) {
-            urls = "${urls},${this.hosts}"
-        }
-        return urls
-    }
-
 }
