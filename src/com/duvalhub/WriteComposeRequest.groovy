@@ -19,7 +19,7 @@ class WriteComposeRequest extends BaseObject {
         this.request = request
         this.config = request.appConfig
         this.appName = this.config.app.name
-        if (this.config.deploy && this.config.deploy.hosts) {
+        if (this.config.deploy) {
             if( this.config.deploy.hosts )  {
                 this.hosts = this.config.deploy.hosts
             }
