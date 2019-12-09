@@ -15,7 +15,7 @@ def call(BuildRequest buildRequest) {
     env.TEMPLATE_PATH = "${basePath}/build/templates"
     env.DOCKERFILE_PATH = "${env.TEMPLATE_PATH}/Dockerfile"
 
-    def script = "${basePath}/scripts/bash/build.sh"
+    def script = "${basePath}/scripts/bash/build/build.sh"
 
     def appBasePath =  "${env.APP_WORKDIR}/app"
     dir(appBasePath) {
