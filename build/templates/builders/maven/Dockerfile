@@ -4,8 +4,7 @@ ARG build_directory
 ARG build_destination=target/*.jar
 COPY src ./src
 COPY pom.xml ./
-RUN mvn install
-RUN echo "build_directory: '$build_directory', build_destination: '$build_destination'"
-RUN mkdir -p ${build_directory} \
+RUN mvn install \
+&& mkdir -p ${build_directory} \
 && rm -r ${build_directory} \
 && mv ${build_destination} ${build_directory}

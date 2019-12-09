@@ -6,7 +6,9 @@ def call(WriteComposeRequest request) {
   env.IMAGE = request.getImage()
   env.HOSTS = request.getDomainNames()
   echo request.toString()
-  env.PORT = request.port
+  if (request.port) {
+    env.PORT = request.port
+  }
   def processScript = "${env.PIPELINE_WORKDIR}/${request.scriptPath}"
   def compose = request.compose
   sh "chmod +x ${processScript} && ${processScript} ${compose}"
