@@ -24,7 +24,7 @@ class Build {
 }
 class Deploy {
     String hosts
-    String port
+    String port = "80"
 }
 class Docker {
     String registry

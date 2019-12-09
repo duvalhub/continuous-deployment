@@ -4,6 +4,7 @@ RUN javac Healthcheck.java
 
 FROM openjdk:8-jre-alpine
 WORKDIR /app
+EXPOSE 8080
 ARG build_directory
 ARG JAR_FILE=target/*.jar
 COPY --from=builder ${build_directory} app.jar

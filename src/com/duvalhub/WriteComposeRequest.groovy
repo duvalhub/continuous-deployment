@@ -13,13 +13,19 @@ class WriteComposeRequest extends BaseObject {
     String appName
     String image
     String hosts
+    String port
 
     WriteComposeRequest(DeployRequest request) {
         this.request = request
         this.config = request.appConfig
         this.appName = this.config.app.name
         if (this.config.deploy && this.config.deploy.hosts) {
-            this.hosts = this.config.deploy.hosts
+            if( this.config.deploy.hosts )  {
+                this.hosts = this.config.deploy.hosts
+            }
+            if ( this.config.deploy.port ) {
+                this.port = this.config.deploy.port
+            }
         }
     }
 
