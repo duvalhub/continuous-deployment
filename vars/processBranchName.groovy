@@ -37,11 +37,6 @@ def call(ProcessBranchNameRequest request) {
       default:
         response.doBuild = true
         response.version = "latest"
-        response.doDeploy = true
-        response.deployEnv = "dev"
-        break
-        response.doBuild = true
-        response.version = "latest"
         response.doDeploy = false
   }
 
