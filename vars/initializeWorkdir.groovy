@@ -2,6 +2,12 @@ import com.duvalhub.GitCloneRequest
 import com.duvalhub.InitializeWorkdirIn
 
 def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
+    checkout scm
+    def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
+
+    echo scmUrl
+
+    return
     echo "### Cloning App into Workdir..."
     if (params.appGitUrl) {
         GitCloneRequest appRequest = new GitCloneRequest(params.appGitUrl, params.appWorkdir)
@@ -9,6 +15,7 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     } else {
         dir(params.appWorkdir) {
             checkout scm
+
         }
     }
     env.APP_WORKDIR = "$WORKSPACE/${params.appWorkdir}"

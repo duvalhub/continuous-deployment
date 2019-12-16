@@ -9,6 +9,8 @@ import com.duvalhub.DeployRequest
 def call() {
   dockerSlave() {
     initializeWorkdirStage()
+    
+    return
     AppConfig conf = readConfiguration()
 
     ProcessBranchNameRequest processBranchNameRequest = new ProcessBranchNameRequest(BRANCH_NAME)
