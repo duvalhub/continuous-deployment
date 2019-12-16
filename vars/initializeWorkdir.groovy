@@ -1,5 +1,6 @@
 import com.duvalhub.GitCloneRequest
 import com.duvalhub.InitializeWorkdirIn
+import com.duvalhub.AppConfig
 
 def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     echo "### Cloning App into Workdir..."
@@ -9,6 +10,12 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     } else {
         dir(params.appWorkdir) {
             checkout scm
+            def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
+            def urlParts = scmUrl.split('/')
+            String org = urlParts[urlParts.size() - 2 ]
+            String repo = urlParts[urlParts.size() - 1].split('\\.')[0]
+            def configUrl = String.format("https://raw.githubusercontent.com/duvalhub/continous-deployment-configs/master/%s/%s/config.yml", org, repo)
+            def response = httpRequest(url: configUrl, outputFile: "config.yml")
         }
     }
     env.APP_WORKDIR = "$WORKSPACE/${params.appWorkdir}"
