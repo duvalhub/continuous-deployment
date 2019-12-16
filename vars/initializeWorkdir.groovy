@@ -5,8 +5,9 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     checkout scm
     def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
 
-    def org = scmUrl.split('/')[0]
-    def repo = scmUrl.split('/')[1].split('.')[0]
+    def urlParts = scmUrl.split('/')
+    def org = urlParts[urlParts.size() - 2 ]
+    def repo = urlParts[urlParts.size - 1].split('.')[0]
     echo "org: '${org}', repo: '${repo}'"
 
     return
