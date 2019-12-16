@@ -12,7 +12,7 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     String repo = urlParts[urlParts.size() - 1].split('\\.')[0]
 
     echo "org: '${org}', repo: '${repo}'"
-    def configUrl = String.format("https://raw.githubusercontent.com/duvalhub/continous-deployment-configs/%s/%s/config.yml", org, repo)
+    def configUrl = String.format("https://raw.githubusercontent.com/duvalhub/continous-deployment-configs/master/%s/%s/config.yml", org, repo)
     def response = httpRequest(configUrl)
 
     println('Status: '+response.status)
