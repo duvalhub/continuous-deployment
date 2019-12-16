@@ -9,7 +9,12 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     println("Url Szie " +urlParts.size())
     
     def org = urlParts[urlParts.size() - 2 ]
-    def repo = urlParts[urlParts.size() - 1].split('.')[0]
+    def repo = urlParts[urlParts.size() - 1]
+
+    echo org
+    echo repo
+    
+    //.split('.')[0]
 
     echo "org: '${org}', repo: '${repo}'"
     def configUrl = String.format("https://raw.githubusercontent.com/duvalhub/continous-deployment-configs/%s/%s/config.yml", org, repo)
