@@ -5,7 +5,9 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     checkout scm
     def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
 
-    echo scmUrl
+    def org = scmUrl.split('/')[0]
+    def repo = scmUrl.split('/')[1].split('.')[0]
+    echo "org: '${org}', repo: '${repo}'"
 
     return
     echo "### Cloning App into Workdir..."
