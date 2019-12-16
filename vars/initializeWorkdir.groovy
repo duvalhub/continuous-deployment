@@ -3,30 +3,6 @@ import com.duvalhub.InitializeWorkdirIn
 import com.duvalhub.AppConfig
 
 def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
-    checkout scm
-    def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
-
-    def urlParts = scmUrl.split('/')
-    println("Url Szie " +urlParts.size())
-    
-    String org = urlParts[urlParts.size() - 2 ]
-    String repo = urlParts[urlParts.size() - 1].split('\\.')[0]
-
-    echo "org: '${org}', repo: '${repo}'"
-    def configUrl = String.format("https://raw.githubusercontent.com/duvalhub/continous-deployment-configs/master/%s/%s/config.yml", org, repo)
-    def response = httpRequest(url: configUrl, outputFile: "config.yml")
-
-    sh "ls -l"
-    sh "cat config.yml"
-    return
-    println('Status: '+response.status)
-    println('Response: '+response.content)
-    AppConfig conf = readYaml text:"""${response.content}"""
-
-    echo conf.toString()
-
-
-    return
     echo "### Cloning App into Workdir..."
     if (params.appGitUrl) {
         GitCloneRequest appRequest = new GitCloneRequest(params.appGitUrl, params.appWorkdir)
@@ -34,7 +10,12 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     } else {
         dir(params.appWorkdir) {
             checkout scm
-
+            def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
+            def urlParts = scmUrl.split('/')
+            String org = urlParts[urlParts.size() - 2 ]
+            String repo = urlParts[urlParts.size() - 1].split('\\.')[0]
+            def configUrl = String.format("https://raw.githubusercontent.com/duvalhub/continous-deployment-configs/master/%s/%s/config.yml", org, repo)
+            def response = httpRequest(url: configUrl, outputFile: "config.yml")
         }
     }
     env.APP_WORKDIR = "$WORKSPACE/${params.appWorkdir}"
