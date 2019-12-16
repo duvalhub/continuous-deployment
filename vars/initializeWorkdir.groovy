@@ -14,7 +14,7 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
 
     echo "org: '${org}', repo: '${repo}'"
     def configUrl = String.format("https://raw.githubusercontent.com/duvalhub/continous-deployment-configs/master/%s/%s/config.yml", org, repo)
-    def response = httpRequest(configUrl, outputFile: "config.yml")
+    def response = httpRequest(configUrl, {outputFile: "config.yml"})
 
     sh "ls -l"
     sh "cat config.yml"
