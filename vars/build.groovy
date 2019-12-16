@@ -17,11 +17,10 @@ def call(BuildRequest buildRequest) {
 
     def script = "${basePath}/scripts/bash/build/build.sh"
 
-    def appBasePath =  "${env.APP_WORKDIR}/app"
+    def appBasePath =  "${env.APP_WORKDIR}"
     dir(appBasePath) {
       sh "chmod +x ${script} && bash -c \"${script} --templates $TEMPLATE_PATH --builder ${conf.build.builder} --build_destination ${conf.build.destination} --container ${conf.build.container}\""
     }
-
   }
 }
 

@@ -1,9 +1,7 @@
 import com.duvalhub.BuildRequest
 import com.duvalhub.AppConfig
-
 import com.duvalhub.ProcessBranchNameRequest
 import com.duvalhub.ProcessBranchNameResponse
-
 import com.duvalhub.DeployRequest
 
 def call() {
@@ -22,7 +20,6 @@ def call() {
       buildRequest.version = processBranchNameResponse.version
       build(buildRequest)
     }
-
 
     if ( processBranchNameResponse.doDeploy ) {
       echo "### Deploying app in '${processBranchNameResponse.deployEnv} version '${processBranchNameResponse.version}'"

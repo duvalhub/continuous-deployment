@@ -16,6 +16,10 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
             String repo = urlParts[urlParts.size() - 1].split('\\.')[0]
             def configUrl = String.format("https://raw.githubusercontent.com/duvalhub/continous-deployment-configs/master/%s/%s/config.yml", org, repo)
             def response = httpRequest(url: configUrl, outputFile: "config.yml")
+            if ( response.status == 404 ) {
+                echo "Config file not found: '${configUrl}'"
+                sh "exit 1"
+            }
         }
     }
     env.APP_WORKDIR = "$WORKSPACE/${params.appWorkdir}"
