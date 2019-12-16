@@ -11,8 +11,10 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     def org = urlParts[urlParts.size() - 2 ]
     def repo = urlParts[urlParts.size() - 1]
 
+    echo scmUrl
     echo org
     echo repo
+    echo repo.split('.')[0]
     
     //.split('.')[0]
 
