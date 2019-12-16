@@ -14,7 +14,7 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     echo scmUrl
     echo org
     echo repo
-    echo repo.split('.')[0]
+    echo repo.split('.')
     
     //.split('.')[0]
 
