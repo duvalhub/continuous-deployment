@@ -18,7 +18,7 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
 
     println('Status: '+response.status)
     println('Response: '+response.content)
-    AppConfig conf = readYaml text:response.content
+    AppConfig conf = readYaml text:"""${response.content}"""
 
     echo conf.toString()
 
