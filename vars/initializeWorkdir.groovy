@@ -9,6 +9,11 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     def org = urlParts[urlParts.size() - 2 ]
     def repo = urlParts[urlParts.size - 1].split('.')[0]
     echo "org: '${org}', repo: '${repo}'"
+    def configUrl = String.format("https://raw.githubusercontent.com/duvalhub/continous-deployment-configs/%s/%s/config.yml", org, repo)
+    def response = httpRequest(configUrl)
+    
+    println('Status: '+response.status)
+    println('Response: '+response.content)
 
     return
     echo "### Cloning App into Workdir..."
