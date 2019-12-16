@@ -1,5 +1,6 @@
 import com.duvalhub.GitCloneRequest
 import com.duvalhub.InitializeWorkdirIn
+import com.duvalhub.AppConfig
 
 def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     checkout scm
@@ -17,6 +18,10 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
 
     println('Status: '+response.status)
     println('Response: '+response.content)
+    AppConfig conf = readYaml text:response.content
+
+    echo conf.toString()
+
 
     return
     echo "### Cloning App into Workdir..."
