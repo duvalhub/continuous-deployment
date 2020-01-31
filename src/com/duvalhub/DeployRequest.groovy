@@ -25,7 +25,7 @@ class DeployRequest extends BaseObject {
             case "stage":
                 host = this.appConfig.hosts.dev
                 break
-            case "prod"
+            case "prod":
                 host = this.appConfig.hosts.prod
                 break
             default:
