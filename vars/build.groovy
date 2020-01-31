@@ -6,7 +6,6 @@ def call(BuildRequest buildRequest) {
     AppConfig conf = buildRequest.appConfig
     String version = buildRequest.version
     String image = conf.getDockerImage()
-    
 
     env.IMAGE = "${image}:${version}"
 
