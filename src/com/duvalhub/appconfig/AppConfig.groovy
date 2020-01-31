@@ -1,4 +1,4 @@
-package com.duvalhub
+package com.duvalhub.appconfig
 
 import com.duvalhub.BaseObject
 import groovy.json.JsonBuilder
