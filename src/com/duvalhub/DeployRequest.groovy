@@ -35,7 +35,7 @@ class DeployRequest extends BaseObject {
     }
 
     String getDockerUrl() {
-        return this.getDockerHost().getUrl()
+        return this.getDockerHost().getDockerUrl()
     }
 
     String getBundleId() {

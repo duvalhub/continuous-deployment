@@ -44,7 +44,7 @@ class DockerHost extends BaseObject {
     String credentialId
     String bundleId
 
-    String getUrl() {
+    String getDockerUrl() {
         return String.format("%s/%s:%s", this.protocole, this.url, this.port)
         
     }
