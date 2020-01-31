@@ -1,7 +1,7 @@
 import com.duvalhub.BuildRequest
 import com.duvalhub.appconfig.AppConfig
-import com.duvalhub.ProcessBranchNameRequest
-import com.duvalhub.ProcessBranchNameResponse
+import com.duvalhub.processBranchName.ProcessBranchNameRequest
+import com.duvalhub.processBranchName.ProcessBranchNameResponse
 import com.duvalhub.DeployRequest
 
 def call() {
