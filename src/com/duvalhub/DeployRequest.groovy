@@ -1,7 +1,8 @@
 package com.duvalhub
 
 import com.duvalhub.BaseObject
-import com.duvalhub.AppConfig
+import com.duvalhub.appconfig.AppConfig
+import com.duvalhub.appconfig.DockerHost
 
 class DeployRequest extends BaseObject {
     AppConfig appConfig
@@ -15,6 +16,34 @@ class DeployRequest extends BaseObject {
         this.appName = appConfig.app.name
         this.version = version
         this.environment = environment
+    }
+
+    DockerHost getDockerHost() {
+        DockerHost host
+        switch(this.environment) {
+            case "dev":
+            case "stage":
+                host = this.appConfig.hosts.dev
+                break
+            case "prod"
+                host = this.appConfig.hosts.prod
+                break
+            default:
+                throw new Exception("Environment can be mapped: '${this.environment}'")
+        }
+        return host
+    }
+
+    String getDockerUrl() {
+        return this.getDockerHost().getUrl()
+    }
+
+    String getBundleId() {
+        return this.getDockerHost().bundleId
+    }
+
+    String getCredentialId() {
+        return this.getDockerHost().credentialId
     }
 
     String getDockerImage() {

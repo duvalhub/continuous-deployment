@@ -1,7 +1,7 @@
 package com.duvalhub
 
 import com.duvalhub.BaseObject
-import com.duvalhub.AppConfig
+import com.duvalhub.appconfig.AppConfig
 
 class BuildRequest extends BaseObject {
     AppConfig appConfig

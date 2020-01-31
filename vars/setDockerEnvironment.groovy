@@ -1,12 +1,12 @@
-def call(Closure body) {
+def call(DeployRequest deployRequest, Closure body) {
     withCredentials([
-        dockerCert(credentialsId: env.DOCKER_BUNDLE_ID, variable: 'DOCKER_CERT_PATH'),
-        usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_CREDENTIALS_USR', passwordVariable: 'DOCKER_CREDENTIALS_PSW')
+        dockerCert(credentialsId: deployRequest.getBundleId(), variable: 'DOCKER_CERT_PATH'),
+        usernamePassword(credentialsId: deployRequest.getCredentialId(), usernameVariable: 'DOCKER_CREDENTIALS_USR', passwordVariable: 'DOCKER_CREDENTIALS_PSW')
     ]) {
       echo "${env.DOCKER_CREDENTIALS_USR}"
       echo "${env.DOCKER_CREDENTIALS_PSW}"
-      env.DOCKER_HOST="tcp://docker-dev.philippeduval.ca:2376"
-      env.DOCKER_TLS_VERIFY=1
+      env.DOCKER_HOST = deployRequest.getDockerUrl()
+      env.DOCKER_TLS_VERIFY = 1
       body()
     }
 }

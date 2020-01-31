@@ -1,5 +1,5 @@
 import com.duvalhub.WriteComposeRequest
-import com.duvalhub.AppConfig
+import com.duvalhub.appconfig.AppConfig
 
 def call(WriteComposeRequest request) {
   env.APP_NAME = request.appName

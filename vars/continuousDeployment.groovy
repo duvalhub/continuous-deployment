@@ -1,12 +1,12 @@
 import com.duvalhub.BuildRequest
-import com.duvalhub.AppConfig
+import com.duvalhub.appconfig.AppConfig
 import com.duvalhub.ProcessBranchNameRequest
 import com.duvalhub.ProcessBranchNameResponse
 import com.duvalhub.DeployRequest
 
 def call() {
   dockerSlave() {
-    initializeWorkdirStage()
+    initializeWorkdir.stage()
 
     AppConfig conf = readConfiguration()
 

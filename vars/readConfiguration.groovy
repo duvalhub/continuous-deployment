@@ -1,4 +1,4 @@
-import com.duvalhub.AppConfig
+import com.duvalhub.appconfig.AppConfig
 
 def call() {
     def workdir = "${env.APP_WORKDIR}"

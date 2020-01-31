@@ -1,6 +1,6 @@
-import com.duvalhub.ProcessBranchNameRequest
-import com.duvalhub.ProcessBranchNameResponse
-import com.duvalhub.AppConfig
+import com.duvalhub.processbranchname.ProcessBranchNameRequest
+import com.duvalhub.processbranchname.ProcessBranchNameResponse
+import com.duvalhub.appconfig.AppConfig
 
 def call(ProcessBranchNameRequest request) {
   ProcessBranchNameResponse response = new ProcessBranchNameResponse()

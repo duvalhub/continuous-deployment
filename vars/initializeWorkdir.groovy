@@ -1,6 +1,6 @@
 import com.duvalhub.GitCloneRequest
 import com.duvalhub.InitializeWorkdirIn
-import com.duvalhub.AppConfig
+import com.duvalhub.appconfig.AppConfig
 
 def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     echo "### Cloning App into Workdir..."
@@ -30,4 +30,10 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     gitClone(pipRequest)
     env.PIPELINE_WORKDIR = "$WORKSPACE/${params.pipelineWorkdir}"
 
+}
+
+def stage() {
+    stage("Initialization") {
+        initializeWorkdir()
+    }    
 }
