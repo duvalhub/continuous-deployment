@@ -1,7 +1,6 @@
 package com.duvalhub.appconfig
 
 import com.duvalhub.BaseObject
-import groovy.json.JsonBuilder
 
 class AppConfig extends BaseObject {
     App app
@@ -38,7 +37,7 @@ class DockerHosts {
     DockerHost prod
 }
 
-class DockerHost {
+class DockerHost extends BaseObject {
     String protocole = "tcp"
     String url
     String port = "2376"
