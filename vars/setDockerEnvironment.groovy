@@ -1,3 +1,5 @@
+import com.duvalhub.appconfig.DockerHost
+
 def call(DockerHost dockerHost, Closure body) {
     withCredentials([
         dockerCert(credentialsId: dockerHost.bundleId, variable: 'DOCKER_CERT_PATH'),
