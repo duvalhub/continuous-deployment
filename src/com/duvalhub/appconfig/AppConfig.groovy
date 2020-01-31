@@ -29,7 +29,7 @@ class Docker {
     String registry
     String namespace
     String repository
-    DockerHost hosts
+    DockerHosts hosts
 }
 
 class DockerHosts {
