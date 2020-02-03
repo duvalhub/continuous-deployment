@@ -9,6 +9,7 @@ def call(ProcessBranchNameRequest request) {
 
   switch(branchName) {
       case "develop":
+      case /test.*/
           response.doBuild = true
           response.version = "latest"
           response.doDeploy = true
