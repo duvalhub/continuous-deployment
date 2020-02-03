@@ -1,8 +1,8 @@
-import com.duvalhub.BuildRequest
+import com.duvalhub.build.BuildRequest
 import com.duvalhub.appconfig.AppConfig
 import com.duvalhub.processbranchname.ProcessBranchNameRequest
 import com.duvalhub.processbranchname.ProcessBranchNameResponse
-import com.duvalhub.DeployRequest
+import com.duvalhub.deploy.DeployRequest
 
 def call() {
   dockerSlave() {

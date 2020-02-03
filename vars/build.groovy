@@ -1,4 +1,4 @@
-import com.duvalhub.BuildRequest
+import com.duvalhub.build.BuildRequest
 import com.duvalhub.appconfig.AppConfig
 
 def call(BuildRequest buildRequest) {

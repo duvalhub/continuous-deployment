@@ -1,4 +1,4 @@
-import com.duvalhub.DeployRequest
+import com.duvalhub.deploy.DeployRequest
 import com.duvalhub.WriteComposeRequest
 import com.duvalhub.appconfig.DockerHost
 
