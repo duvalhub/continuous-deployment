@@ -1,5 +1,5 @@
-import com.duvalhub.GitCloneRequest
-import com.duvalhub.InitializeWorkdirIn
+import com.duvalhub.gitclone.GitCloneRequest
+import com.duvalhub.initializeworkdir.InitializeWorkdirIn
 import com.duvalhub.appconfig.AppConfig
 
 def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {

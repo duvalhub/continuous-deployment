@@ -1,4 +1,4 @@
-import com.duvalhub.GitCloneRequest
+import com.duvalhub.gitclone.GitCloneRequest
 
 def call(GitCloneRequest request) {
 

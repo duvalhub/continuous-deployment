@@ -1,5 +1,5 @@
 import com.duvalhub.deploy.DeployRequest
-import com.duvalhub.WriteComposeRequest
+import com.duvalhub.writecompose.WriteComposeRequest
 import com.duvalhub.appconfig.DockerHost
 
 def call(DeployRequest request) {

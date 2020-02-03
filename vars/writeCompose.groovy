@@ -1,4 +1,4 @@
-import com.duvalhub.WriteComposeRequest
+import com.duvalhub.writecompose.WriteComposeRequest
 import com.duvalhub.appconfig.AppConfig
 
 def call(WriteComposeRequest request) {
