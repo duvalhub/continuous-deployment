@@ -3,6 +3,7 @@ package com.duvalhub
 import com.duvalhub.BaseObject
 import com.duvalhub.appconfig.AppConfig
 import groovy.json.JsonBuilder
+import com.duvalhub.deploy.DeployRequest
 
 class WriteComposeRequest extends BaseObject {
     DeployRequest request
