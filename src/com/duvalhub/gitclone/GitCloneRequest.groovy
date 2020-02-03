@@ -1,4 +1,4 @@
-package com.duvalhub
+package com.duvalhub.gitclone
 
 import com.duvalhub.BaseObject
 

@@ -1,4 +1,4 @@
-package com.duvalhub
+package com.duvalhub.initializeworkdir
 
 import com.duvalhub.BaseObject
 

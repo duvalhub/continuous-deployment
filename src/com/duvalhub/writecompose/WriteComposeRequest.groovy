@@ -1,4 +1,4 @@
-package com.duvalhub
+package com.duvalhub.writecompose
 
 import com.duvalhub.BaseObject
 import com.duvalhub.appconfig.AppConfig
