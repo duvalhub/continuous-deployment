@@ -24,10 +24,10 @@ class DeployRequest extends BaseObject {
         switch(this.environment) {
             case "dev":
             case "stage":
-                host = this.appConfig.docker.platforms.dev
+                host = this.appConfig.deploy.platforms.dev
                 break
             case "prod":
-                host = this.appConfig.docker.platforms.prod
+                host = this.appConfig.deploy.platforms.prod
                 break
             default:
                 throw new Exception("Environment can be mapped: '${this.environment}'")
