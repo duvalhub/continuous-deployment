@@ -8,7 +8,7 @@ def call(DeployRequest request) {
     WriteComposeRequest writeComposeRequest = new WriteComposeRequest(request)
     String composeFilePath = writeCompose(writeComposeRequest)
     Platform platform = request.getDockerHost()
-    setDockerEnvironment(dockerHost) {
+    setDockerEnvironment(platform.dockerHost) {
       sh "docker stack deploy -c ${composeFilePath} ${request.getStackName()}"
     }
   }
