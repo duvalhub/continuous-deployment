@@ -3,6 +3,7 @@ package com.duvalhub.deploy
 import com.duvalhub.BaseObject
 import com.duvalhub.appconfig.AppConfig
 import com.duvalhub.appconfig.DockerHost
+import com.duvalhub.appconfig.PlatformHost
 
 class DeployRequest extends BaseObject {
     AppConfig appConfig
