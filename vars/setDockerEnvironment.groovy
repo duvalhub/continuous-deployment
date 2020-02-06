@@ -1,4 +1,4 @@
-import com.duvalhub.appconfig.AppConfig
+import com.duvalhub.appconfig.DockerHost
 
 def call(DockerHost dockerHost, Closure body) {
   echo "Setting docker environment. dockerHost: '${dockerHost.toString()}'"
