@@ -18,7 +18,7 @@ def call(BuildRequest buildRequest) {
 
     def appBasePath =  "${env.APP_WORKDIR}"
     dir(appBasePath) {
-      setDockerEnvironment(conf.docker.hosts.dev) {
+      setDockerEnvironment(conf.build.host) {
         sh "chmod +x ${script} && bash -c \"${script} --templates $TEMPLATE_PATH --builder ${conf.build.builder} --build_destination ${conf.build.destination} --container ${conf.build.container}\""
       }
     }

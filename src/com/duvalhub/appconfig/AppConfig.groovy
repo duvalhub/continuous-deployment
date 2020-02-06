@@ -4,9 +4,9 @@ import com.duvalhub.BaseObject
 
 class AppConfig extends BaseObject {
     App app
-    Docker docker
     Build build
     Deploy deploy
+    Docker docker
 
     String getDockerImage(){
         return "${this.docker.registry}/${this.docker.namespace}/${this.docker.repository}"
@@ -20,16 +20,27 @@ class Build {
     String builder
     String destination = "build"
     String container
+    DockerHost host
 }
 class Deploy {
-    String hosts
+    String hostnames
     String port = "80"
+    Platforms platforms
+    DockerHosts hosts
+}
+class Platforms {
+    Platform dev
+    Platform prod
+}
+class Platform {
+    String hostname
+    DockerHost host
 }
 class Docker {
     String registry
     String namespace
     String repository
-    DockerHosts hosts
+    String credentialId
 }
 
 class DockerHosts {
@@ -41,7 +52,6 @@ class DockerHost extends BaseObject {
     String protocole = "tcp"
     String url
     String port = "2376"
-    String credentialId
     String bundleId
 
     String getDockerUrl() {
