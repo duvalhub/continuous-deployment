@@ -1,6 +1,7 @@
 import com.duvalhub.deploy.DeployRequest
 import com.duvalhub.writecompose.WriteComposeRequest
 import com.duvalhub.appconfig.DockerHost
+import com.duvalhub.appconfig.Platform
 
 def call(DeployRequest request) {
   stage('Deploy') {
