@@ -1,7 +1,7 @@
 FROM alpine as builder
 WORKDIR /builder
 ARG build_directory
-ARG build_destination
+ARG build_destination=public
 COPY src ${build_destination}
 RUN mkdir -p ${build_directory} \
 && rm -r ${build_directory} \
