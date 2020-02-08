@@ -7,4 +7,4 @@ rm -rf $GIT_DIRECTORY
 git --version
 ls -l $SCRIPT_DIR
 cat $SCRIPT_DIR
-GIT_SSH_COMMAND="ssh -i $SCRIPT_DIR  -F /dev/null" git clone $GIT_URL $GIT_DIRECTORY
+GIT_SSH_COMMAND="ssh -i $SCRIPT_DIR" git clone $GIT_URL $GIT_DIRECTORY
