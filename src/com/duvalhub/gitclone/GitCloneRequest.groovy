@@ -6,6 +6,7 @@ class GitCloneRequest extends BaseObject {
     String directory
     String url
     String toCheckout
+    String credentialsId = "SERVICE_ACCOUNT_SSH"
 
     GitCloneRequest(String url, String directory, String toCheckout) {
         this(url, directory)
