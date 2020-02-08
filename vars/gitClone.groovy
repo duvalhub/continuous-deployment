@@ -9,9 +9,9 @@ def call(GitCloneRequest request) {
             "GIT_DIRECTORY=${request.directory}",
             "GIT_URL=${request.url}"
         ]) {
-            echo "GIT_SSH_COMMAND: '$GIT_SSH_COMMAND'"
-            sh 'echo "GIT_SSH_COMMAND: \'$GIT_SSH_COMMAND\'"'
-            String script = "${BASE_DIR}/scripts/bash/gitclone/gitclone.sh"
+            //echo "GIT_SSH_COMMAND: '$GIT_SSH_COMMAND'"
+            //sh 'echo "GIT_SSH_COMMAND: \'$GIT_SSH_COMMAND\'"'
+            String script = "${env.PIPELINE_WORKDIR}/scripts/bash/gitclone/gitclone.sh"
             executeScript(script)
             /*
             ssh """
