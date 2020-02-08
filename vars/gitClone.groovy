@@ -2,7 +2,7 @@ import com.duvalhub.gitclone.GitCloneRequest
 
 def call(GitCloneRequest request) {
     echo "#### GitCloning with GitCloneRequest '${request.toString()}'"
-    withSsh() {
+    withSshKey() {
         withEnv([
             "GIT_DIRECTORY=${request.directory}",
             "GIT_URL=${request.url}"
