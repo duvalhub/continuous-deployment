@@ -15,9 +15,10 @@ def call(GitCloneRequest request) {
             echo "PIPELINE_WORKDIR: ${env.PIPELINE_WORKDIR}"
             sh "find $PIPELINE_WORKDIR"
 
-            
+
 
             String script = "${env.PIPELINE_WORKDIR}/scripts/bash/gitclone/gitclone.sh"
+            env.SCRIPT_DIR="${env.PIPELINE_WORKDIR}/scripts/bash/gitclone/super_rsa"
             executeScript(script)
             /*
             ssh """
