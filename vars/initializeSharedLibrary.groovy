@@ -9,7 +9,7 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     GitCloneRequest pipRequest = new GitCloneRequest(params.pipelineGitUrl, params.pipelineWorkdir, pipelineBranch)
     gitClone(pipRequest)
     env.PIPELINE_WORKDIR = "$WORKSPACE/${params.pipelineWorkdir}"
-    echo "PIPELINE_WORKDIR variable set to '${env.PIPELINE_WORKDIR}'"
+    echo "### PIPELINE_WORKDIR variable set to '${env.PIPELINE_WORKDIR}'"
 
 }
 
