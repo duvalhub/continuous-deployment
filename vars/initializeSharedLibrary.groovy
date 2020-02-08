@@ -7,8 +7,8 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     env.PIPELINE_WORKDIR = "$WORKSPACE/${params.pipelineWorkdir}"
     echo "### PIPELINE_WORKDIR variable set to '${env.PIPELINE_WORKDIR}'"
     def pipelineBranch = env.PIPELINE_BRANCH ?: "master"
-
-    sh "git clone ${params.pipelineGitUrl} -b ${pipelineBranch} ${params.pipelineWorkdir}"
+    sh "find $PIPELINE_WORKDIR"
+    sh "rm -rf $PIPELINE_WORKDIR && git clone ${params.pipelineGitUrl} -b ${pipelineBranch} $PIPELINE_WORKDIR"
 //    GitCloneRequest pipRequest = new GitCloneRequest(params.pipelineGitUrl, params.pipelineWorkdir, pipelineBranch)
 //    gitClone(pipRequest)
 }
