@@ -26,11 +26,7 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     }
     env.APP_WORKDIR = "$WORKSPACE/${params.appWorkdir}"
 
-    echo "### Cloning Jenkins into Workdir..."
-    GitCloneRequest pipRequest = new GitCloneRequest(params.pipelineGitUrl, params.pipelineWorkdir, pipelineBranch)
-    gitClone(pipRequest)
-    env.PIPELINE_WORKDIR = "$WORKSPACE/${params.pipelineWorkdir}"
-
+    initializeSharedLibrary(params)
 }
 
 def stage() {
