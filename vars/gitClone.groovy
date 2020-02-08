@@ -1,6 +1,7 @@
 import com.duvalhub.gitclone.GitCloneRequest
 
 def call(GitCloneRequest request) {
+    echo "#### GitCloning with GitCloneRequest '${request.toString()}'"
     withCredentials([
         sshUserPrivateKey(keyFileVariable: 'SSH_KEY_PATH', credentialsId: request.credentialsId)
     ]) {
@@ -11,6 +12,7 @@ def call(GitCloneRequest request) {
         ]) {
             //echo "GIT_SSH_COMMAND: '$GIT_SSH_COMMAND'"
             //sh 'echo "GIT_SSH_COMMAND: \'$GIT_SSH_COMMAND\'"'
+            echo "PIPELINE_WORKDIR: ${env.PIPELINE_WORKDIR}"
             String script = "${env.PIPELINE_WORKDIR}/scripts/bash/gitclone/gitclone.sh"
             executeScript(script)
             /*
