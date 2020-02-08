@@ -9,7 +9,8 @@ def call(GitCloneRequest request) {
         ]) {
             echo "GIT_SSH_COMMAND: '$GIT_SSH_COMMAND'"
             sh 'echo "GIT_SSH_COMMAND: \'$GIT_SSH_COMMAND\'"'
-            sh "rm -rf ${request.directory} && GIT_SSH_COMMAND=\"ssh -i $(realpath id_rsa)  -F /dev/null\" git clone ${request.url} ${request.directory}"
+            sh "rm -rf ${request.directory}"
+            sh "GIT_SSH_COMMAND=\"ssh -i $SSH_KEY_PATH  -F /dev/null\" git clone ${request.url} ${request.directory}"
 
             if ( request.toCheckout ) {
                 dir( request.directory) {
