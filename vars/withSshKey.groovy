@@ -4,8 +4,9 @@ def call (Closure body) {
         sshUserPrivateKey(keyFileVariable: 'SSH_KEY_PATH', credentialsId: "SERVICE_ACCOUNT_SSH")
     ]) {
         withEnv([
-            "GIT_SSH_COMMAND=\"ssh -oStrictHostKeyChecking=accept-new -i $SSH_KEY_PATH -F /dev/null\""
+            "GIT_SSH_COMMANDw=\"ssh -oStrictHostKeyChecking=accept-new -i $SSH_KEY_PATH -F /dev/null\""
         ]) {
+            env.GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=accept-new -i $SSH_KEY_PATH -F /dev/null"
             body()
         }
     }
