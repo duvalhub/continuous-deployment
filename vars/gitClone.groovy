@@ -5,11 +5,11 @@ def call(GitCloneRequest request) {
         sshUserPrivateKey(keyFileVariable: 'SSH_KEY_PATH', credentialsId: request.credentialsId)
     ]) {
         withEnv([
-            "GIT_SSH_COMMAND=\"ssh -i ${env.SSH_KEY_PATH} -F /dev/null\""
+            "GIT_SSH_COMMANDs=\"ssh -i ${env.SSH_KEY_PATH} -F /dev/null\""
         ]) {
             echo "GIT_SSH_COMMAND: '$GIT_SSH_COMMAND'"
-            sh 'echo "$GIT_SSH_COMMAND: \'$GIT_SSH_COMMAND\'"'
-            sh "rm -rf ${request.directory} && git clone ${request.url} ${request.directory}"
+            sh 'echo "GIT_SSH_COMMAND: \'$GIT_SSH_COMMAND\'"'
+            sh "rm -rf ${request.directory} && GIT_SSH_COMMAND=\"ssh -i $(realpath id_rsa)  -F /dev/null\" git clone ${request.url} ${request.directory}"
 
             if ( request.toCheckout ) {
                 dir( request.directory) {
