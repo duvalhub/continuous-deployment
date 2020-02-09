@@ -16,8 +16,8 @@ class InitializeWorkdirIn extends BaseObject {
         this.appWorkdir = "app-workdir"
     }
 
-    InitializeWorkdirIn(String url ) {
+    InitializeWorkdirIn(String appGitUrl) {
         this()
-        this.url = url
+        this.appGitUrl = appGitUrl
     }
 }
