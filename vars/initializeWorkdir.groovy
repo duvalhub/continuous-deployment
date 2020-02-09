@@ -3,7 +3,10 @@ import com.duvalhub.initializeworkdir.InitializeWorkdirIn
 import com.duvalhub.appconfig.AppConfig
 
 def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
+    echo "### Initializing Work Directory. InitializeWorkdirIn: '${params.toString()}'"
     def pipelineBranch = env.PIPELINE_BRANCH ?: "master"
+
+    initializeSharedLibrary(params)
 
     echo "### Cloning App into Workdir..."
     if (params.appGitUrl) {
@@ -26,7 +29,6 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     }
     env.APP_WORKDIR = "$WORKSPACE/${params.appWorkdir}"
 
-    initializeSharedLibrary(params)
 }
 
 def stage() {

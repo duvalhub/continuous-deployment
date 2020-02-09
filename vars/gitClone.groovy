@@ -8,7 +8,6 @@ def call(GitCloneRequest request) {
             "GIT_URL=${request.url}"
         ]) {
             String script = "${env.PIPELINE_WORKDIR}/scripts/bash/gitclone/gitclone.sh"
-            env.SCRIPT_DIR="${env.PIPELINE_WORKDIR}/scripts/bash/gitclone/super_rsa"
             executeScript(script)
 
             if ( request.toCheckout ) {

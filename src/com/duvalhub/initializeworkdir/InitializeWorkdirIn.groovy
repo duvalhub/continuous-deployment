@@ -17,7 +17,7 @@ class InitializeWorkdirIn extends BaseObject {
     }
 
     InitializeWorkdirIn(String url ) {
+        this()
         this.url = url
-        this.directory = "cloned"
     }
 }
