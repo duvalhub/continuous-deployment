@@ -8,9 +8,9 @@ class GitCloneRequest extends BaseObject {
     GitRepo gitRepo
     String credentialsId = "SERVICE_ACCOUNT_SSH"
 
-    GitCloneRequest(GitRepo gitRepo, String toCheckout) {
+    GitCloneRequest(GitRepo gitRepo, String directory) {
         this(gitRepo)
-        this.toCheckout = toCheckout
+        this.directory = directory
     }
 
     GitCloneRequest(GitRepo gitRepo ) {
