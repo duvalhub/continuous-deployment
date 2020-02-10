@@ -1,23 +1,23 @@
 package com.duvalhub.initializeworkdir
 
 import com.duvalhub.BaseObject
+import com.duvalhub.git.GitRepo
 
 class InitializeWorkdirIn extends BaseObject {
     String appWorkdir
-    String appGitUrl
-    String appToCheckout
+    GitRepo appGitRepo
+    
     String pipelineWorkdir
-    String pipelineGitUrl
-    String pipelineToCheckout
+    GitRepo pipelineGitRepo
 
     InitializeWorkdirIn() {
-        this.pipelineGitUrl = "https://github.com/duvalhub/continous-deployment.git"
+        this.appGitRepo = new GitRepo("duvalhub", "continous-deployment")
         this.pipelineWorkdir = "jenkins-workdir"
         this.appWorkdir = "app-workdir"
     }
 
-    InitializeWorkdirIn(String appGitUrl) {
+    InitializeWorkdirIn(GitRepo appGitRepo) {
         this()
-        this.appGitUrl = appGitUrl
+        this.appGitRepo = appGitRepo
     }
 }

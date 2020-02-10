@@ -1,4 +1,4 @@
-import com.duvalhub.gitclone.GitCloneRequest
+import com.duvalhub.git.GitCloneRequest
 
 def call(GitCloneRequest request) {
     echo "#### GitCloning with GitCloneRequest '${request.toString()}'"

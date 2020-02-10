@@ -1,4 +1,4 @@
-import com.duvalhub.gitclone.GitCloneRequest
+import com.duvalhub.git.GitCloneRequest
 import com.duvalhub.initializeworkdir.InitializeWorkdirIn
 import com.duvalhub.appconfig.AppConfig
 
