@@ -20,4 +20,9 @@ class GitRepo extends BaseObject {
     String getUrl() {
         return String.format("git@github.com:%s/%s.git", this.org, this.repo)
     }
+
+    String getHttpUrl() {
+        return String.format("https://github.com/%s/%s.git", this.org, this.repo)
+    }
+
 }
