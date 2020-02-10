@@ -27,13 +27,15 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
         }
     }
 
-    def configUrl = String.format("https://raw.githubusercontent.com/duvalhub/continous-deployment-configs/%s/%s/%s/config.yml", pipelineBranch, org, repo)
-    def response = httpRequest(url: configUrl, outputFile: "config.yml")
-    if ( response.status == 404 ) {
-        echo "Config file not found: '${configUrl}'"
-        sh "exit 1"
+    dir(params.appWorkdir) {
+        def configUrl = String.format("https://raw.githubusercontent.com/duvalhub/continous-deployment-configs/%s/%s/%s/config.yml", pipelineBranch, org, repo)
+        def response = httpRequest(url: configUrl, outputFile: "config.yml")
+        if ( response.status == 404 ) {
+            echo "Config file not found: '${configUrl}'"
+            sh "exit 1"
+        }
+        env.APP_WORKDIR = "$WORKSPACE/${params.appWorkdir}"
     }
-    env.APP_WORKDIR = "$WORKSPACE/${params.appWorkdir}"
 
 }
 
