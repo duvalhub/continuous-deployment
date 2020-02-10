@@ -12,9 +12,9 @@ def call(GitCloneRequest request) {
             String script = "${env.PIPELINE_WORKDIR}/scripts/bash/gitclone/gitclone.sh"
             executeScript(script)
 
-            if ( request.gitRepo.toCheckout ) {
+            if ( request.gitRepo.branch ) {
                 dir( request.directory) {
-                    sh "git checkout ${request.gitRepo.toCheckout}"
+                    sh "git checkout ${request.gitRepo.branch}"
                 }
             }
         }
