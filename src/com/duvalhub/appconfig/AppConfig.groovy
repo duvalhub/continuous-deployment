@@ -30,6 +30,7 @@ class Deploy {
 }
 class Platforms {
     Platform dev
+    Platform stage
     Platform prod
 }
 class Platform {
