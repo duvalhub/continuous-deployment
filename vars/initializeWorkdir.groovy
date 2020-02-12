@@ -27,7 +27,7 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
         }
     }
 
-    dir(params.appWorkdir) {
+//    dir(params.appWorkdir) {
         def configUrl = String.format("https://raw.githubusercontent.com/duvalhub/continous-deployment-configs/%s/%s/%s/config.yml", pipelineBranch, org, repo)
         def response = httpRequest(url: configUrl, outputFile: "config.yml")
         if ( response.status == 404 ) {
@@ -35,7 +35,7 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
             sh "exit 1"
         }
         env.APP_WORKDIR = "$WORKSPACE/${params.appWorkdir}"
-    }
+//    }
 
 }
 
