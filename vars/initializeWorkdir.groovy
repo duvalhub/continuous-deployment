@@ -39,8 +39,8 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
 
 }
 
-def stage() {
+def stage(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     stage("Initialization") {
-        initializeWorkdir()
+        initializeWorkdir(params)
     }    
 }

@@ -15,6 +15,7 @@ class AppConfig extends BaseObject {
 class App {
     String name
     String group
+    String version_control
 }
 class Build {
     String builder
