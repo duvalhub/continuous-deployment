@@ -10,8 +10,8 @@ def call(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     sh "rm -rf $PIPELINE_WORKDIR && git clone ${params.pipelineGitRepo.getHttpUrl()} -b ${pipelineBranch} $PIPELINE_WORKDIR"
 }
 
-def stage() {
+def stage(InitializeWorkdirIn params = new InitializeWorkdirIn()) {
     stage("Initialization Shared Library") {
-        initializeSharedLibrary()
+        initializeSharedLibrary(params)
     }    
 }
