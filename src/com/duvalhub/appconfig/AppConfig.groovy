@@ -39,7 +39,8 @@ class Platform {
     DockerHost host
 }
 class Docker {
-    String registry
+    String registry_api = "https://index.docker.io/v1"
+    String registry = "docker.io"
     String namespace
     String repository
     String credentialId
