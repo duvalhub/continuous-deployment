@@ -12,9 +12,10 @@ esac; shift; done
 echo "### Builder: '$builder', Container: '$container', BuildDestination: '$build_destination'"
 DOCKERFILE=$(mktemp)
 
-if [ -z "$build_destination" ];
-then
-  export build_destination=$build_destination
+if [ -z "$build_destination" ]; then
+  export build_destination="build"
+else
+  export build_destination
 fi
 
 cat "$templates/builders/$builder/Dockerfile" > $DOCKERFILE
