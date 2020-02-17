@@ -1,4 +1,4 @@
-package com.duvalhub
+package com.duvalhub.processbranchname
 
 import com.duvalhub.BaseObject
 import groovy.json.JsonBuilder

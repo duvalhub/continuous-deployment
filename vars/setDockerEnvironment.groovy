@@ -1,12 +1,20 @@
-def call(Closure body) {
-    withCredentials([
-        dockerCert(credentialsId: env.DOCKER_BUNDLE_ID, variable: 'DOCKER_CERT_PATH'),
-        usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_CREDENTIALS_USR', passwordVariable: 'DOCKER_CREDENTIALS_PSW')
-    ]) {
-      echo "${env.DOCKER_CREDENTIALS_USR}"
-      echo "${env.DOCKER_CREDENTIALS_PSW}"
-      env.DOCKER_HOST="tcp://docker-dev.philippeduval.ca:2376"
-      env.DOCKER_TLS_VERIFY=1
-      body()
-    }
+import com.duvalhub.appconfig.DockerHost
+
+def call(DockerHost dockerHost, Closure body) {
+  echo "Setting docker environment. dockerHost: '${dockerHost.toString()}'"
+  withCredentials([
+      dockerCert(credentialsId: dockerHost.bundleId, variable: 'DOCKER_CERT_PATH')
+  ]) {
+    env.DOCKER_HOST = dockerHost.getDockerUrl()
+    env.DOCKER_TLS_VERIFY = 1
+    body()
+  }
+}
+
+def withCredentials(DockerHost dockerHost, String credentialId, Closure body) {
+  withCredentials([
+    usernamePassword(credentialsId: credentialId, usernameVariable: 'DOCKER_CREDENTIALS_USR', passwordVariable: 'DOCKER_CREDENTIALS_PSW')
+  ]) {
+    setDockerEnvironment(dockerHost, body)
+  }
 }

@@ -1,14 +1,16 @@
-import com.duvalhub.DeployRequest
-import com.duvalhub.WriteComposeRequest
+import com.duvalhub.deploy.DeployRequest
+import com.duvalhub.writecompose.WriteComposeRequest
+import com.duvalhub.appconfig.DockerHost
+import com.duvalhub.appconfig.Platform
 
 def call(DeployRequest request) {
   stage('Deploy') {
     WriteComposeRequest writeComposeRequest = new WriteComposeRequest(request)
     String composeFilePath = writeCompose(writeComposeRequest)
-
-    sh "cat ${composeFilePath}"
-    sh "docker stack deploy -c ${composeFilePath} ${request.getStackName()}"
-
+    Platform platform = request.getDockerHost()
+    setDockerEnvironment(platform.host) {
+      sh "docker stack deploy -c ${composeFilePath} ${request.getStackName()}"
+    }
   }
 }
 

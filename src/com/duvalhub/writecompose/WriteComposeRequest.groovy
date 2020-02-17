@@ -1,8 +1,9 @@
-package com.duvalhub
+package com.duvalhub.writecompose
 
 import com.duvalhub.BaseObject
-import com.duvalhub.AppConfig
+import com.duvalhub.appconfig.AppConfig
 import groovy.json.JsonBuilder
+import com.duvalhub.deploy.DeployRequest
 
 class WriteComposeRequest extends BaseObject {
     DeployRequest request

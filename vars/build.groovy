@@ -1,12 +1,11 @@
-import com.duvalhub.BuildRequest
-import com.duvalhub.AppConfig
+import com.duvalhub.build.BuildRequest
+import com.duvalhub.appconfig.AppConfig
 
 def call(BuildRequest buildRequest) {
   stage('Build') {
     AppConfig conf = buildRequest.appConfig
     String version = buildRequest.version
     String image = conf.getDockerImage()
-    
 
     env.IMAGE = "${image}:${version}"
 
@@ -19,7 +18,9 @@ def call(BuildRequest buildRequest) {
 
     def appBasePath =  "${env.APP_WORKDIR}"
     dir(appBasePath) {
-      sh "chmod +x ${script} && bash -c \"${script} --templates $TEMPLATE_PATH --builder ${conf.build.builder} --build_destination ${conf.build.destination} --container ${conf.build.container}\""
+      setDockerEnvironment.withCredentials(conf.build.host, conf.docker.credentialId) {
+        sh "chmod +x ${script} && bash -c \"${script} --templates $TEMPLATE_PATH --builder ${conf.build.builder} --build_destination ${conf.build.destination} --container ${conf.build.container}\""
+      }
     }
   }
 }

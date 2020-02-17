@@ -1,14 +1,15 @@
-import com.duvalhub.ProcessBranchNameRequest
-import com.duvalhub.ProcessBranchNameResponse
-import com.duvalhub.AppConfig
+import com.duvalhub.processbranchname.ProcessBranchNameRequest
+import com.duvalhub.processbranchname.ProcessBranchNameResponse
+import com.duvalhub.appconfig.AppConfig
 
 def call(ProcessBranchNameRequest request) {
   ProcessBranchNameResponse response = new ProcessBranchNameResponse()
   String branchName = request.branchName
-  def releasePattern = /release\/(v.*)/
+  def releasePattern = /release\/(.*)/
 
   switch(branchName) {
       case "develop":
+      case ~/test.*/:
           response.doBuild = true
           response.version = "latest"
           response.doDeploy = true
@@ -42,10 +43,14 @@ def call(ProcessBranchNameRequest request) {
 
   if ( response.doBuild ) {
       echo "Building version '${response.version}' from branch '${branchName}'"
+  } else {
+      echo "We don't build this branch: '${branchName}'"
   }
  
   if ( response.doDeploy ) {
       echo "Promoting version '${response.version}' in '${response.deployEnv}'"
+  } else {
+      echo "We don't deploy this branch: '${branchName}'"
   }
   
   return response

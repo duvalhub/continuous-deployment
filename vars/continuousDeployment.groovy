@@ -1,12 +1,12 @@
-import com.duvalhub.BuildRequest
-import com.duvalhub.AppConfig
-import com.duvalhub.ProcessBranchNameRequest
-import com.duvalhub.ProcessBranchNameResponse
-import com.duvalhub.DeployRequest
+import com.duvalhub.build.BuildRequest
+import com.duvalhub.appconfig.AppConfig
+import com.duvalhub.processbranchname.ProcessBranchNameRequest
+import com.duvalhub.processbranchname.ProcessBranchNameResponse
+import com.duvalhub.deploy.DeployRequest
 
 def call() {
   dockerSlave() {
-    initializeWorkdirStage()
+    initializeWorkdir.stage()
 
     AppConfig conf = readConfiguration()
 
@@ -22,7 +22,7 @@ def call() {
     }
 
     if ( processBranchNameResponse.doDeploy ) {
-      echo "### Deploying app in '${processBranchNameResponse.deployEnv} version '${processBranchNameResponse.version}'"
+      echo "### Deploying app version '${processBranchNameResponse.version}' in '${processBranchNameResponse.deployEnv}'"
       DeployRequest deployRequest = new DeployRequest(conf, processBranchNameResponse.version, processBranchNameResponse.deployEnv)
       deploy(deployRequest)
     }
