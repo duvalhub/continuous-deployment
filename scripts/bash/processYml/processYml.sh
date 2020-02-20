@@ -36,7 +36,7 @@ add_external_network() {
     yq w -i "$TMP_YML" "networks.$network_ref.name" $network_name
     yq w -i "$TMP_YML" "networks.$network_ref.external" "true"
 }
-add_external_network internal "$STACK_NAME"_"$APP_NAME"
+add_external_network internal "$STACK_NAME"_internal
 if [ ! -z "$HOSTS" ]; then
     add_external_network reverseproxy
 fi

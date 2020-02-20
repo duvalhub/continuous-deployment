@@ -11,7 +11,7 @@ docker network inspect "$network" > /dev/null
 
 result="$?"
 if [ "$result" = 0 ]; then
-    echo "Network already exists"
+    echo "Network '$network' already exists"
     exit 0
 fi
 
