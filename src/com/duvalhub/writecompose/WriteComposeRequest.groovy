@@ -11,6 +11,7 @@ class WriteComposeRequest extends BaseObject {
     String base = "philippeduval.ca"
     String scriptPath = "scripts/bash/processYml/processYml.sh"
     String compose = "docker-compose.yml"
+    String stackName
     String appName
     String image
     String hosts
@@ -19,6 +20,7 @@ class WriteComposeRequest extends BaseObject {
     WriteComposeRequest(DeployRequest request) {
         this.request = request
         this.config = request.appConfig
+        this.stackName = request.getStackName()
         this.appName = this.config.app.name
         if (this.config.deploy) {
             if( this.config.deploy.hosts )  {

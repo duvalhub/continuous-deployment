@@ -8,6 +8,7 @@ test_param() {
         missing_params=true
     fi
 }
+test_param "$STACK_NAME" "STACK_NAME"
 test_param "$APP_NAME" "APP_NAME"
 test_param "$IMAGE" "IMAGE"
 if [ "$missing_params" = true ]; then
