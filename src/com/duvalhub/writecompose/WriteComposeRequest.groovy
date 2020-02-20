@@ -53,9 +53,10 @@ class WriteComposeRequest extends BaseObject {
         }
 
         if(platform.hostname) {
-           urls += platform.hostname
+           urls += " " + platform.hostname
         }
 
         return urls        
     }
+    
 }
