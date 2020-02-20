@@ -33,7 +33,7 @@ yq n version \"3.8\" > "$TMP_YML"
 add_external_network() {
     local network_ref="${1:-internal}"
     local network_name="${2:-$network_ref}"
-    yq w -i "$TMP_YML" "networks.$network_ref.name" "$network_name"
+    yq w -i "$TMP_YML" "networks.$network_ref.name" $network_name
     yq w -i "$TMP_YML" "networks.$network_ref.external" "true"
 }
 add_external_network internal "$STACK_NAME"_"$APP_NAME"
