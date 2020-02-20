@@ -41,7 +41,7 @@ class WriteComposeRequest extends BaseObject {
 
     String getDomainNames() {
 
-        Platform platform = getPlatform()
+        Platform platform = this.request.getPlatform()
         String urls = ""
 
         if ( platform.defaultHostname ) {
