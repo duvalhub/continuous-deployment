@@ -52,8 +52,8 @@ class WriteComposeRequest extends BaseObject {
             urls += [this.appName, this.config.app.group, this.request.environment, this.base].join(".")
         }
 
-        if(this.hosts) {
-           urls += this.hosts
+        if(platform.hostname) {
+           urls += platform.hostname
         }
 
         return urls        
