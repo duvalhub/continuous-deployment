@@ -16,12 +16,7 @@ if [ "$missing_params" = true ]; then
     exit 1
 fi
 
-add_external_network() {
-    local network_ref="${1:internal}"
-    local network_name="${2:$1}"
-    yq w -i "$TMP_YML" "networks.$network_ref.name" "$network_name"
-    yq w -i "$TMP_YML" "networks.$network_ref.external" "true"
-}
+
 
 echo "### Creating docker-compose.yml file named '$1'"
 
@@ -35,6 +30,12 @@ BASE_PATH="services.$APP_NAME"
 yq n version \"3.8\" > "$TMP_YML"
 
 # Networks
+add_external_network() {
+    local network_ref="${1:-internal}"
+    local network_name="${2:-$network_ref}"
+    yq w -i "$TMP_YML" "networks.$network_ref.name" "$network_name"
+    yq w -i "$TMP_YML" "networks.$network_ref.external" "true"
+}
 add_external_network internal "$STACK_NAME"_"$APP_NAME"
 if [ ! -z "$HOSTS" ]; then
     add_external_network reverseproxy

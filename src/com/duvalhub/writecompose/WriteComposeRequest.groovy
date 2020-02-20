@@ -29,6 +29,7 @@ class WriteComposeRequest extends BaseObject {
             }
         }
     }
+    
     String getStackName() {
         return this.request.getStackName()
     }
