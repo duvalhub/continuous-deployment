@@ -16,9 +16,10 @@ if [ "$missing_params" = true ]; then
 fi
 
 add_external_network() {
-    local network_name="${1:internal}"
-    yq w -i "$TMP_YML" "networks.$network_name.name" "$network_name"
-    yq w -i "$TMP_YML" "networks.$network_name.external" true
+    local network_ref="${1:internal}"
+    local network_name="${2:$1}"
+    yq w -i "$TMP_YML" "networks.$network_ref.name" "$network_name"
+    yq w -i "$TMP_YML" "networks.$network_ref.external" "true"
 }
 
 echo "### Creating docker-compose.yml file named '$1'"
@@ -33,7 +34,7 @@ BASE_PATH="services.$APP_NAME"
 yq n version \"3.8\" > "$TMP_YML"
 
 # Networks
-add_external_network internal
+add_external_network internal "$STACK_NAME"_"$APP_NAME"
 if [ ! -z "$HOSTS" ]; then
     add_external_network reverseproxy
 fi
@@ -50,10 +51,9 @@ fi
 if [ ! -z "$HOSTS" ]; then
     yq w -i "$TMP_YML" "$BASE_PATH.environment[+]" "VIRTUAL_HOST=$HOSTS"
     yq w -i "$TMP_YML" "$BASE_PATH.environment[+]" "LETSENCRYPT_HOST=$HOSTS"
-    yq w -i "$TMP_YML" "$BASE_PATH.networks[+]" "reverseproxy"
+    yq w -i "$TMP_YML" "$BASE_PATH.networks[+]" reverseproxy
 fi
-yq w -i "$TMP_YML" "$BASE_PATH.networks[+]" "internal"
-
+yq w -i "$TMP_YML" "$BASE_PATH.networks[+]" internal
 
 echo "### Result : "
 cat "$TMP_YML"

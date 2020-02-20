@@ -1,9 +1,8 @@
 #!/bin/bash
 
+export STACK_NAME="caramba"
 export APP_NAME="toto"
 export IMAGE="africa"
-#export HOSTS="totoafrica.com"
-#export PORT="8080"
 
 echo "####################"
 echo "############ Without Hosts"
