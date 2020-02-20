@@ -8,7 +8,6 @@ test_param() {
         missing_params=true
     fi
 }
-test_param "$1" "1"
 test_param "$APP_NAME" "APP_NAME"
 test_param "$IMAGE" "IMAGE"
 if [ "$missing_params" = true ]; then
@@ -18,8 +17,8 @@ fi
 
 add_external_network() {
     local network_name="${1:internal}"
-    yq n networks.$network_name.external true >> "$TMP_YML"
     yq w -i "$TMP_YML" "networks.$network_name.name" "$network_name"
+    yq w -i "$TMP_YML" "networks.$network_name.external" true
 }
 
 echo "### Creating docker-compose.yml file named '$1'"
@@ -60,9 +59,6 @@ echo "### Result : "
 cat "$TMP_YML"
 
 if [ ! -z "$1" ]; then
-    cat "$TMP_YML"
+    cat "$TMP_YML" > "$1"
+    echo "### Wrote yml file succesfully."
 fi
-
-echo
-echo "### Wrote yml file succesfully."
-
