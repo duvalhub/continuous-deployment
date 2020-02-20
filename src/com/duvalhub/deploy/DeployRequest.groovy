@@ -33,6 +33,10 @@ class DeployRequest extends BaseObject {
         return host
     }
 
+    String getInternalNetwork() {
+        return "${this.getStackName}_internal"
+    }
+
     String getDockerUrl() {
         return this.getDockerHost().getDockerUrl()
     }
