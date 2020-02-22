@@ -19,7 +19,7 @@ class DeployRequest extends BaseObject {
         this.environment = environment
     }
 
-    Platform getDockerHost() {
+    Platform getPlatform() {
         Platform host
         switch(this.environment) {
             case "dev":
@@ -31,6 +31,14 @@ class DeployRequest extends BaseObject {
                 throw new Exception("Environment can be mapped: '${this.environment}'")
         }
         return host
+    }
+
+    Platform getDockerHost() {
+        return this.getPlatform()
+    }
+
+    String getInternalNetwork() {
+        return "${this.getStackName()}_internal"
     }
 
     String getDockerUrl() {

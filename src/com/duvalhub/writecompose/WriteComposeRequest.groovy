@@ -4,6 +4,7 @@ import com.duvalhub.BaseObject
 import com.duvalhub.appconfig.AppConfig
 import groovy.json.JsonBuilder
 import com.duvalhub.deploy.DeployRequest
+import com.duvalhub.appconfig.Platform
 
 class WriteComposeRequest extends BaseObject {
     DeployRequest request
@@ -30,19 +31,32 @@ class WriteComposeRequest extends BaseObject {
         }
     }
 
+    String getStackName() {
+        return this.request.getStackName()
+    }
+
     String getImage() {
         return this.request.getDockerImage()
     }
 
     String getDomainNames() {
-        def name = this.appName
-        def group = this.config.app.group
-        def env = this.request.environment
-        def base = this.base
-        def urls = [this.appName, this.config.app.group, this.request.environment, this.base].join(".")
-        if(this.hosts) {
-           urls += this.hosts
+
+        Platform platform = this.request.getPlatform()
+        String urls = ""
+
+        if ( platform.defaultHostname ) {
+            String name = this.appName
+            String group = this.config.app.group
+            String env = this.request.environment
+            String base = this.base
+            urls += [this.appName, this.config.app.group, this.request.environment, this.base].join(".")
         }
+
+        if(platform.hostname) {
+           urls += "," + platform.hostname
+        }
+
         return urls        
     }
+    
 }

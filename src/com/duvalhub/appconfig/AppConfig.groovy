@@ -36,6 +36,7 @@ class Platforms {
 }
 class Platform {
     String hostname
+    Boolean defaultHostname = true
     DockerHost host
 }
 class Docker {
