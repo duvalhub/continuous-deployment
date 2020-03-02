@@ -15,9 +15,7 @@ def call() {
 
     if ( processBranchNameResponse.doBuild ) {
       echo "### Building app on version '${processBranchNameResponse.version}'"
-      BuildRequest buildRequest = new BuildRequest()
-      buildRequest.appConfig = conf
-      buildRequest.version = processBranchNameResponse.version
+      BuildRequest buildRequest = new BuildRequest(conf, processBranchNameResponse.version)
       build(buildRequest)
     }
 
