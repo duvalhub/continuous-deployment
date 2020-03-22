@@ -6,6 +6,10 @@ import com.duvalhub.deploy.DeployRequest
 
 def call() {
   dockerSlave() {
+
+    sh "env"
+    sh "env | grep GIT"
+    return
     initializeWorkdir.stage()
 
     AppConfig conf = readConfiguration()
