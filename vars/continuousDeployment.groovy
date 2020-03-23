@@ -7,8 +7,11 @@ import com.duvalhub.deploy.DeployRequest
 def call() {
   dockerSlave() {
 
+    sh "git remote -v"
     sh "env"
     sh "env | grep GIT"
+    //GitRepo gitRepo = new GitRepo()
+
     return
     initializeWorkdir.stage()
 
