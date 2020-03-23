@@ -8,9 +8,10 @@ def call() {
   dockerSlave() {
 
     checkout scm
+    sh "git pull --tags"
     sh "git remote -v"
-    sh "env"
-    sh "env | grep GIT"
+//    sh "env"
+  //  sh "env | grep GIT"
     //GitRepo gitRepo = new GitRepo()
 
     return
