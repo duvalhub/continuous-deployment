@@ -7,6 +7,7 @@ import com.duvalhub.deploy.DeployRequest
 def call() {
   dockerSlave() {
 
+    checkout scm
     sh "git remote -v"
     sh "env"
     sh "env | grep GIT"
