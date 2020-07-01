@@ -27,7 +27,7 @@ def call(ProcessBranchNameRequest request) {
         case "master":
             response.doDeploy = true
             dir(env.APP_WORKDIR) {
-                withSssKey() {
+                withSshKey() {
                     sh "git remote -v"
                     sh "git pull"
                     sh "git fetch --tags > /dev/null"
