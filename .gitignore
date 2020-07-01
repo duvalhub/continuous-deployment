@@ -1,2 +1,4 @@
 **/*.yml
-**/todelete
+**/todelete.idea
+target
+.idea
