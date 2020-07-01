@@ -27,12 +27,14 @@ def call(ProcessBranchNameRequest request) {
         case "master":
             response.doDeploy = true
             dir(env.APP_WORKDIR) {
-                sh "git remote -v"
-                sh "git pull"
-                sh "git fetch --tags > /dev/null"
-                response.version = sh(returnStdout: true, script: '''
+                withSssKey() {
+                    sh "git remote -v"
+                    sh "git pull"
+                    sh "git fetch --tags > /dev/null"
+                    response.version = sh(returnStdout: true, script: '''
                     echo $(git tag --points-at HEAD)
                 ''').trim()
+                }
             }
             response.deployEnv = "prod"
             break
