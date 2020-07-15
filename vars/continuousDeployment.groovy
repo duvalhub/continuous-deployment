@@ -10,7 +10,7 @@ def call() {
     dir( "${WORKSPACE}@shared-library") {
       sh "env"
 
-      def branch = sh(script: "env | grep 'library.shared-library.version' | cut -d '=' -f 2", returnStdout: true, trim: true).trim
+      def branch = sh(script: "env | grep 'library.shared-library.version' | cut -d '=' -f 2", returnStdout: true).trim()
 
 //        def branch = env['library.shared-library.version']
       echo "hello god"
