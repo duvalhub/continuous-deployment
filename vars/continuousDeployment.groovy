@@ -5,8 +5,6 @@ import com.duvalhub.processbranchname.ProcessBranchNameResponse
 import com.duvalhub.deploy.DeployRequest
 
 def call() {
-  //initializeSharedLibrary.findVersion()
-
   dockerSlave() {
     initializeWorkdir.stage()
 
