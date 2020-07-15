@@ -5,8 +5,21 @@ import com.duvalhub.processbranchname.ProcessBranchNameResponse
 import com.duvalhub.deploy.DeployRequest
 
 def call() {
-  dockerSlave() {
+  node('master') {
+    sh "env"
+    dir( "${WORKSPACE}@shared-library") {
+      sh "env"
 
+      def branch = sh(script: "env | grep 'library.shared-library.version' | cut -d '=' -f 2", returnStdout: true, trim: true).trim
+
+//        def branch = env['library.shared-library.version']
+      echo "hello god"
+      echo "Branch: '$branch'"
+      env.ZE_BRANCH = branch
+    }
+  }
+  dockerSlave() {
+    echo "ze branch= : '${env.ZE_BRANCH}'"
     initializeWorkdir.stage()
 
     AppConfig conf = readConfiguration()
