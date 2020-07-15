@@ -6,6 +6,7 @@ import com.duvalhub.deploy.DeployRequest
 
 def call() {
   dockerSlave() {
+
     initializeWorkdir.stage()
 
     AppConfig conf = readConfiguration()
