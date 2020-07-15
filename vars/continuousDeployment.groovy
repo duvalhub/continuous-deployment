@@ -6,14 +6,8 @@ import com.duvalhub.deploy.DeployRequest
 
 def call() {
   initializeSharedLibrary.findSharedLibraryVersion()
-  /*
-  node('master') {
-    def branch = sh(script: "env | grep 'library.shared-library.version' | cut -d '=' -f 2", returnStdout: true).trim()
-    env.PIPELINE_BRANCH = branch
-  }
-   */
+
   dockerSlave() {
-    echo "ze branch= : '${env.PIPELINE_BRANCH}'"
     initializeWorkdir.stage()
 
     AppConfig conf = readConfiguration()
