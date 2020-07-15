@@ -5,7 +5,7 @@ import com.duvalhub.processbranchname.ProcessBranchNameResponse
 import com.duvalhub.deploy.DeployRequest
 
 def call() {
-  findSharedLibraryVersion()
+  initializeSharedLibrary.findSharedLibraryVersion()
   /*
   node('master') {
     def branch = sh(script: "env | grep 'library.shared-library.version' | cut -d '=' -f 2", returnStdout: true).trim()
