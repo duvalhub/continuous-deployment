@@ -7,6 +7,12 @@ import com.duvalhub.deploy.DeployRequest
 def call() {
   dockerSlave() {
 
+    setDockerEnvironment() {
+      echo "allo"
+    }
+
+    sh "exit"
+
     initializeWorkdir.stage()
 
     AppConfig conf = readConfiguration()
