@@ -7,19 +7,11 @@ import com.duvalhub.deploy.DeployRequest
 def call() {
     dockerSlave() {
         String host = "vps287088.duvalhub.com"
-        withSshKey2(host, "SERVICE_ACCOUNT_SSH_2") {
+        withSshKey2(host, "SERVICE_ACCOUNT_SSH_2","jenkins") {
             sh "docker context create toto-africa --description 'dude' --docker 'host=ssh://${host}'"
             sh "docker context use toto-africa"
             sh "docker ps"
         }
-//    withCredentials([sshUserPrivateKey(credentialsId: "SERVICE_ACCOUNT_SSH_2", keyFileVariable: 'keyfile')]) {
-//
-//    }
-//    setDockerEnvironment() {
-//      echo "allo"
-//    }
-
-        sh "exit 1"
 
         initializeWorkdir.stage()
 
