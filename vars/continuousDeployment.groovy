@@ -19,7 +19,7 @@ def call() {
 //      echo "allo"
 //    }
 
-    sh "exit"
+    sh "exit 1"
 
     initializeWorkdir.stage()
 
