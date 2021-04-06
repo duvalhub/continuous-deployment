@@ -15,7 +15,6 @@ def call() {
 
         initializeWorkdir.stage()
 
-        sh "exit 1"
         AppConfig conf = readConfiguration()
 
         ProcessBranchNameRequest processBranchNameRequest = new ProcessBranchNameRequest(BRANCH_NAME)
