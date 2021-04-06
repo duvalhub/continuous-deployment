@@ -7,9 +7,16 @@ import com.duvalhub.deploy.DeployRequest
 def call() {
   dockerSlave() {
 
-    setDockerEnvironment() {
-      echo "allo"
+    withSshKey2() {
+      sh "docker context create toto-africa --description 'dude' --docker 'host=ssh://root@totoafrica.vps287088.duvalhub.com'"
+      sh "docker ps"
     }
+//    withCredentials([sshUserPrivateKey(credentialsId: "SERVICE_ACCOUNT_SSH_2", keyFileVariable: 'keyfile')]) {
+//
+//    }
+//    setDockerEnvironment() {
+//      echo "allo"
+//    }
 
     sh "exit"
 
