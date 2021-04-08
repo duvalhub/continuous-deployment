@@ -6,16 +6,7 @@ import com.duvalhub.deploy.DeployRequest
 
 def call() {
     dockerSlave() {
-//        String host = "vps287088.duvalhub.com"
-//        withSshKey2(host, "SERVICE_ACCOUNT_SSH_2","jenkins") {
-//            sh "docker context create toto-africa --description 'dude' --docker 'host=ssh://${host}'"
-//            sh "docker context use toto-africa"
-//            sh "docker ps"
-//        }
-
-        initializeWorkdir.stage()
-
-        AppConfig conf = readConfiguration()
+        AppConfig conf = initializeWorkdir.stage()
 
         ProcessBranchNameRequest processBranchNameRequest = new ProcessBranchNameRequest(BRANCH_NAME)
         ProcessBranchNameResponse processBranchNameResponse = processBranchName(processBranchNameRequest)
