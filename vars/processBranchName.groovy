@@ -7,14 +7,6 @@ def call(ProcessBranchNameRequest request) {
     def releasePattern = /release\/(.*)/
 
     switch (branchName) {
-        case "develop":
-        case ~/test.*/:
-            response.doBuild = true
-            response.version = "latest"
-            response.doDeploy = true
-            response.deployEnv = "dev"
-            break
-
         case ~releasePattern:
             def matcher = branchName =~ releasePattern
             def version = matcher[0][1]
@@ -23,8 +15,8 @@ def call(ProcessBranchNameRequest request) {
             response.doDeploy = true
             response.deployEnv = "stage"
             break
-
         case "master":
+        case "production":
             response.doDeploy = true
             dir(env.APP_WORKDIR) {
                 withSshKey() {
@@ -41,7 +33,9 @@ def call(ProcessBranchNameRequest request) {
         default:
             response.doBuild = true
             response.version = "latest"
-            response.doDeploy = false
+            response.doDeploy = true
+            response.deployEnv = "dev"
+
     }
 
     if (response.doBuild) {
