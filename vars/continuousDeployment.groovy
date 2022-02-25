@@ -12,13 +12,11 @@ def call() {
         ProcessBranchNameResponse processBranchNameResponse = processBranchName(processBranchNameRequest)
 
         if (processBranchNameResponse.doBuild) {
-            echo "### Building app on version '${processBranchNameResponse.version}'"
             BuildRequest buildRequest = new BuildRequest(conf, processBranchNameResponse.version)
             build(buildRequest)
         }
 
         if (processBranchNameResponse.doDeploy) {
-            echo "### Deploying app version '${processBranchNameResponse.version}' in '${processBranchNameResponse.deployEnv}'"
             DeployRequest deployRequest = new DeployRequest(conf, processBranchNameResponse.version, processBranchNameResponse.deployEnv)
             deploy(deployRequest)
         }
