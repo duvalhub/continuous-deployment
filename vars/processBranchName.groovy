@@ -25,7 +25,11 @@ def call(ProcessBranchNameRequest request) {
 //                    sh "git branch"
 //                    sh "git status"
                     sh "git remote -v"
-                    sh "git remote set-url origin git@${SSH_HOST}:"
+                    sh '''
+                        origin_url=$(git remote get-url)
+                        IFS='/' read -ra URL_PARTS <<<"$origin_url"
+                        git remote set-url origin git@${SSH_HOST}:${URL_PARTS[3]/${URL_PARTS[4]}}
+                    '''
 //                    sh "git pull"
                     sh "git fetch --tags > /dev/null"
                     response.version = sh(returnStdout: true, script: '''
