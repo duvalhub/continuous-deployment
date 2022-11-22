@@ -21,6 +21,7 @@ def call(ProcessBranchNameRequest request) {
             dir(env.APP_WORKDIR) {
                 withSshKey("github.com", "SERVICE_ACCOUNT_SSH", "git") {
                     sh "cat ~/.ssh/config"
+                    sh 'echo $SSH_HOST'
                     sh "git pull"
                     sh "git fetch --tags > /dev/null"
                     response.version = sh(returnStdout: true, script: '''
