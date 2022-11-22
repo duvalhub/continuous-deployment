@@ -20,10 +20,11 @@ def call(ProcessBranchNameRequest request) {
             response.doDeploy = true
             dir(env.APP_WORKDIR) {
                 withSshKey("github.com", "SERVICE_ACCOUNT_SSH", "git") {
+                    sh "cat ~/.ssh/config"
                     sh "git pull"
                     sh "git fetch --tags > /dev/null"
                     response.version = sh(returnStdout: true, script: '''
-                    echo $(git tag --points-at HEAD)
+                    git tag --points-at HEAD
                 ''').trim()
                 }
             }
