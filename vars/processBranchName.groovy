@@ -32,8 +32,6 @@ def call(ProcessBranchNameRequest request) {
         case "main":
         case "develop":
             dir(env.APP_WORKDIR) {
-                sh "git pull"
-                sh "git fetch --tags > /dev/null"
                 String buildNumber = sh(returnStdout: true, script: '''
                     git rev-list --count HEAD
                 ''').trim()
