@@ -25,7 +25,7 @@ def call(ProcessBranchNameRequest request) {
 //                    sh "git branch"
 //                    sh "git status"
                     sh "git remote -v"
-                    sh '''
+                    sh '''#!/usr/bin/env bash
                         origin_url=$(git remote get-url origin)
                         echo "URL = $origin_url"
                         IFS='/' read -ra URL_PARTS <<<"$origin_url"
