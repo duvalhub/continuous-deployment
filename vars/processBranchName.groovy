@@ -29,7 +29,7 @@ def call(ProcessBranchNameRequest request) {
                         origin_url=$(git remote get-url origin)
                         echo "URL = $origin_url"
                         IFS='/' read -ra URL_PARTS <<<"$origin_url"
-                        echo "Parts are ${URL_PARTS[@]}
+                        echo "Parts are ${URL_PARTS[@]}"
                         git remote set-url origin git@${SSH_HOST}:${URL_PARTS[3]/${URL_PARTS[4]}}
                     '''
                     sh "git remote -v"
