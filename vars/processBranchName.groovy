@@ -26,7 +26,7 @@ def call(ProcessBranchNameRequest request) {
 //                    sh "git status"
                     sh "git remote -v"
                     sh '''
-                        origin_url=$(git remote get-url)
+                        origin_url=$(git remote get-url origin)
                         IFS='/' read -ra URL_PARTS <<<"$origin_url"
                         git remote set-url origin git@${SSH_HOST}:${URL_PARTS[3]/${URL_PARTS[4]}}
                     '''
