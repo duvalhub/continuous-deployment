@@ -3,7 +3,6 @@ import com.duvalhub.appconfig.AppConfig
 import com.duvalhub.processbranchname.ProcessBranchNameRequest
 import com.duvalhub.processbranchname.ProcessBranchNameResponse
 import com.duvalhub.deploy.DeployRequest
-import javafx.fxml.Initializable
 import com.duvalhub.initializeworkdir.InitializeWorkdirIn
 
 def call() {
