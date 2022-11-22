@@ -8,7 +8,7 @@ import com.duvalhub.initializeworkdir.InitializeWorkdirIn
 def call() {
     dockerSlave() {
         InitializeWorkdirIn initializeWorkdirIn = new InitializeWorkdirIn()
-        initializeWorkdirIn.setClonePipelineRepo(false)
+        initializeWorkdirIn.setCloneAppRepo(false)
         AppConfig conf = initializeWorkdir.stage(initializeWorkdirIn)
 
         ProcessBranchNameRequest processBranchNameRequest = new ProcessBranchNameRequest(BRANCH_NAME)
