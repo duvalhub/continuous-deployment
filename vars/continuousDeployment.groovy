@@ -3,10 +3,14 @@ import com.duvalhub.appconfig.AppConfig
 import com.duvalhub.processbranchname.ProcessBranchNameRequest
 import com.duvalhub.processbranchname.ProcessBranchNameResponse
 import com.duvalhub.deploy.DeployRequest
+import javafx.fxml.Initializable
+import com.duvalhub.initializeworkdir.InitializeWorkdirIn
 
 def call() {
     dockerSlave() {
-        AppConfig conf = initializeWorkdir.stage()
+        InitializeWorkdirIn initializeWorkdirIn = new InitializeWorkdirIn()
+        initializeWorkdirIn.setClonePipelineRepo(false)
+        AppConfig conf = initializeWorkdir.stage(initializeWorkdirIn)
 
         ProcessBranchNameRequest processBranchNameRequest = new ProcessBranchNameRequest(BRANCH_NAME)
         ProcessBranchNameResponse processBranchNameResponse = processBranchName(processBranchNameRequest)
