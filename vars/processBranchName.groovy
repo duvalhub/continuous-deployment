@@ -54,20 +54,19 @@ def call(ProcessBranchNameRequest request) {
             break
     }
 
-}
 
-if (response.doBuild) {
-    echo "Building version '${response.version}' from branch '${branchName}'"
-} else {
-    echo "We don't build this branch: '${branchName}'"
-}
+    if (response.doBuild) {
+        echo "Building version '${response.version}' from branch '${branchName}'"
+    } else {
+        echo "We don't build this branch: '${branchName}'"
+    }
 
-if (response.doDeploy) {
-    echo "Promoting version '${response.version}' in '${response.deployEnv}'"
-} else {
-    echo "We don't deploy this branch: '${branchName}'"
-}
+    if (response.doDeploy) {
+        echo "Promoting version '${response.version}' in '${response.deployEnv}'"
+    } else {
+        echo "We don't deploy this branch: '${branchName}'"
+    }
 
-return response
+    return response
 }
 
