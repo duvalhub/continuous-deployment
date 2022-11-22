@@ -19,16 +19,18 @@ def call(ProcessBranchNameRequest request) {
         case "production":
             response.doDeploy = true
             dir(env.APP_WORKDIR) {
-                withSshKey("github.com", "SERVICE_ACCOUNT_SSH", "git") {
-                    sh "cat ~/.ssh/config"
-                    sh 'echo $SSH_HOST'
+//                withSshKey("github.com", "SERVICE_ACCOUNT_SSH", "git") {
+//                    sh "cat ~/.ssh/config"
+//                    sh 'echo $SSH_HOST'
+                    sh "git branch"
+                    sh "git status"
                     sh "git remote -v"
                     sh "git pull"
                     sh "git fetch --tags > /dev/null"
                     response.version = sh(returnStdout: true, script: '''
                     git tag --points-at HEAD
                 ''').trim()
-                }
+//                }
             }
             response.deployEnv = "prod"
             break;
