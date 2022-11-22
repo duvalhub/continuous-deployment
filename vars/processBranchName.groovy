@@ -25,7 +25,7 @@ def call(ProcessBranchNameRequest request) {
                     sh "git branch"
                     sh "git status"
                     sh "git remote -v"
-                    sh "git pull"
+//                    sh "git pull"
                     sh "git fetch --tags > /dev/null"
                     response.version = sh(returnStdout: true, script: '''
                     git tag --points-at HEAD
