@@ -75,7 +75,7 @@ def setAsOneBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse r
     echo "Applyting strategy OneBranch on ${branchName}"
     String appVersion = getVersionSignature(env.APP_WORKDIR);
     String libVersion = getVersionSignature(SharedLibrary.getWorkdir(env));
-    String version = String.format("%s-%s", appVersion, libVersion)
+    String version = sanitize(appVersion, libVersion)
     switch (branchName) {
         case "main":
         case "master":
@@ -86,11 +86,20 @@ def setAsOneBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse r
             break
         default:
             response.doBuild = true
-            response.version = String.format("%s-%s", branchName.replaceAll("/", "-"), version)
+            response.version = String.format("%s-%s", sanitize(branchName), version)
             response.doDeploy = true
             response.deployEnv = "dev"
             break
     }
+}
+
+static String sanitize(String appVersion, String libVersion) {
+    String tag = String.format("%s-%s", appVersion, libVersion)
+    tag = tag.replaceAll("/", "-")
+    if(tag.length() > 128) {
+        tag = tag.substring(tag.length() - 128, tag.length())
+    }
+    return tag
 }
 
 String getVersionSignature(path) {
