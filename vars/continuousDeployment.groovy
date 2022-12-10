@@ -11,7 +11,7 @@ def call() {
         AppConfig conf = initializeWorkdir.stage(initializeWorkdirIn)
 
         ProcessBranchNameRequest processBranchNameRequest = new ProcessBranchNameRequest(BRANCH_NAME)
-        ProcessBranchNameResponse processBranchNameResponse = processBranchName(processBranchNameRequest)
+        ProcessBranchNameResponse processBranchNameResponse = processBranchName(processBranchNameRequest, conf)
 
         if (processBranchNameResponse.doBuild) {
             echo "### Building app on version '${processBranchNameResponse.version}'"
