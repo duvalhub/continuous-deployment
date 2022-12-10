@@ -1,4 +1,5 @@
 import com.duvalhub.processbranchname.ProcessBranchNameRequest
+import com.duvalhub.initializeworkdir.SharedLibrary
 import com.duvalhub.processbranchname.ProcessBranchNameResponse
 
 def call(ProcessBranchNameRequest request) {
@@ -18,25 +19,26 @@ def call(ProcessBranchNameRequest request) {
         case "master":
         case "production":
             response.doDeploy = true
-            dir(env.APP_WORKDIR) {
-                withSshKey("github.com", "SERVICE_ACCOUNT_SSH", "git") {
-                    sh "git remote -v"
-                    sh "git pull"
-                    sh "git fetch --tags > /dev/null"
-                    response.version = sh(returnStdout: true, script: '''
-                    echo $(git tag --points-at HEAD)
-                ''').trim()
-                }
-            }
+            response.version = getTag(env.APP_WORKDIR)
             response.deployEnv = "prod"
+            break;
+        case "main":
+        case "develop":
+            String appVersion = getVersionSignature(env.APP_WORKDIR);
+            String libVersion = getVersionSignature(SharedLibrary.getWorkdir(env));
+            response.version = String.format("%s-%s", appVersion, libVersion)
+            response.doBuild = true
+            response.doDeploy = true
+            response.deployEnv = "dev"
             break
         default:
             response.doBuild = true
             response.version = "latest"
             response.doDeploy = true
             response.deployEnv = "dev"
-
+            break
     }
+
 
     if (response.doBuild) {
         echo "Building version '${response.version}' from branch '${branchName}'"
@@ -53,3 +55,32 @@ def call(ProcessBranchNameRequest request) {
     return response
 }
 
+def getVersionSignature(path) {
+    dir(path) {
+        String buildNumber = sh(returnStdout: true, script: '''
+                    git rev-list --count HEAD
+                ''').trim()
+        String shortCommit = sh(returnStdout: true, script: '''
+                    git rev-parse --short HEAD
+                ''').trim()
+        return String.format("%s.%s", buildNumber, shortCommit)
+    }
+}
+
+def String getTag(String path) {
+    dir(path) {
+        withSshKey("github.com", "SERVICE_ACCOUNT_SSH", "git") {
+            sh '''#!/usr/bin/env bash
+                        origin_url=$(git remote get-url origin)
+                        echo "URL = $origin_url"
+                        IFS='/' read -ra URL_PARTS <<<"$origin_url"
+                        echo "Parts are ${URL_PARTS[@]}"
+                        git remote set-url origin git@${SSH_HOST}:${URL_PARTS[3]}/${URL_PARTS[4]}
+                    '''
+            sh "git fetch --tags > /dev/null"
+            response.version = sh(returnStdout: true, script: '''
+                        git tag --points-at HEAD
+                    ''').trim()
+        }
+    }
+}
