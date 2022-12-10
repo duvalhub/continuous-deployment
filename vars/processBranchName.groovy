@@ -1,4 +1,5 @@
 import com.duvalhub.processbranchname.ProcessBranchNameRequest
+import com.duvalhub.initializeworkdir.SharedLibrary
 import com.duvalhub.processbranchname.ProcessBranchNameResponse
 
 def call(ProcessBranchNameRequest request) {
@@ -20,11 +21,6 @@ def call(ProcessBranchNameRequest request) {
             response.doDeploy = true
             dir(env.APP_WORKDIR) {
                 withSshKey("github.com", "SERVICE_ACCOUNT_SSH", "git") {
-//                    sh "cat ~/.ssh/config"
-//                    sh 'echo $SSH_HOST'
-//                    sh "git branch"
-//                    sh "git status"
-                    sh "git remote -v"
                     sh '''#!/usr/bin/env bash
                         origin_url=$(git remote get-url origin)
                         echo "URL = $origin_url"
@@ -32,8 +28,6 @@ def call(ProcessBranchNameRequest request) {
                         echo "Parts are ${URL_PARTS[@]}"
                         git remote set-url origin git@${SSH_HOST}:${URL_PARTS[3]}/${URL_PARTS[4]}
                     '''
-                    sh "git remote -v"
-//                    sh "git pull"
                     sh "git fetch --tags > /dev/null"
                     response.version = sh(returnStdout: true, script: '''
                         git tag --points-at HEAD
@@ -44,15 +38,9 @@ def call(ProcessBranchNameRequest request) {
             break;
         case "main":
         case "develop":
-            dir(env.APP_WORKDIR) {
-                String buildNumber = sh(returnStdout: true, script: '''
-                    git rev-list --count HEAD
-                ''').trim()
-                String shortCommit = sh(returnStdout: true, script: '''
-                    git rev-parse --short HEAD
-                ''').trim()
-                response.version = String.format("%s-%s", buildNumber, shortCommit)
-            }
+            String appVersion = getVersionSignature(env.APP_WORKDIR);
+            String libVersion = getVersionSignature(SharedLibrary.getWordir(env));
+            response.version = String.format("%s-%s", appVersion, libVersion)
             response.doBuild = true
             response.doDeploy = true
             response.deployEnv = "dev"
@@ -81,3 +69,14 @@ def call(ProcessBranchNameRequest request) {
     return response
 }
 
+def getVersionSignature(path) {
+    dir(path) {
+        String buildNumber = sh(returnStdout: true, script: '''
+                    git rev-list --count HEAD
+                ''').trim()
+        String shortCommit = sh(returnStdout: true, script: '''
+                    git rev-parse --short HEAD
+                ''').trim()
+        return String.format("%s.%s", buildNumber, shortCommit)
+    }
+}
