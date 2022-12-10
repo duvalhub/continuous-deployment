@@ -1,12 +1,40 @@
 import com.duvalhub.processbranchname.ProcessBranchNameRequest
 import com.duvalhub.initializeworkdir.SharedLibrary
 import com.duvalhub.processbranchname.ProcessBranchNameResponse
+import com.duvalhub.appconfig.AppConfig
 
-def call(ProcessBranchNameRequest request) {
+def call(ProcessBranchNameRequest request, AppConfig appConfig) {
     ProcessBranchNameResponse response = new ProcessBranchNameResponse()
     String branchName = request.branchName
-    def releasePattern = /release\/(.*)/
+    String type = appConfig.strategy.type
+    switch (type) {
+        case MULTI_BRANCH:
+            setAsMultiBranch(request, response)
+            break;
+        case ONE_BRANCH:
+            setAsOneBranch(request, response)
+            break;
+    }
 
+    if (response.doBuild) {
+        echo "Building version '${response.version}' from branch '${branchName}'"
+    } else {
+        echo "We don't build this branch: '${branchName}'"
+    }
+
+    if (response.doDeploy) {
+        echo "Promoting version '${response.version}' in '${response.deployEnv}'"
+    } else {
+        echo "We don't deploy this branch: '${branchName}'"
+    }
+
+    return response
+}
+
+
+def setAsMultiBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse response) {
+    String branchName = request.branchName
+    def releasePattern = /release\/(.*)/
     switch (branchName) {
         case ~releasePattern:
             def matcher = branchName =~ releasePattern
@@ -38,24 +66,31 @@ def call(ProcessBranchNameRequest request) {
             response.deployEnv = "dev"
             break
     }
-
-
-    if (response.doBuild) {
-        echo "Building version '${response.version}' from branch '${branchName}'"
-    } else {
-        echo "We don't build this branch: '${branchName}'"
-    }
-
-    if (response.doDeploy) {
-        echo "Promoting version '${response.version}' in '${response.deployEnv}'"
-    } else {
-        echo "We don't deploy this branch: '${branchName}'"
-    }
-
-    return response
 }
 
-def getVersionSignature(path) {
+def setAsOneBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse response) {
+    String branchName = request.branchName
+    String appVersion = getVersionSignature(env.APP_WORKDIR);
+    String libVersion = getVersionSignature(SharedLibrary.getWorkdir(env));
+    String version = String.format("%s-%s", appVersion, libVersion)
+    switch (branchName) {
+        case "main":
+        case "develop":
+            response.version = version
+            response.doBuild = true
+            response.doDeploy = true
+            response.deployEnv = "prod"
+            break
+        default:
+            response.doBuild = true
+            response.version = String.format("%s-%s", branchName, version)
+            response.doDeploy = true
+            response.deployEnv = "dev"
+            break
+    }
+}
+
+String getVersionSignature(path) {
     dir(path) {
         String buildNumber = sh(returnStdout: true, script: '''
                     git rev-list --count HEAD
@@ -67,7 +102,7 @@ def getVersionSignature(path) {
     }
 }
 
-def String getTag(String path) {
+String getTag(String path) {
     dir(path) {
         withSshKey("github.com", "SERVICE_ACCOUNT_SSH", "git") {
             sh '''#!/usr/bin/env bash
