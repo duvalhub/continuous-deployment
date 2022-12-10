@@ -8,10 +8,10 @@ def call(ProcessBranchNameRequest request, AppConfig appConfig) {
     String branchName = request.branchName
     String type = appConfig.strategy.type
     switch (type) {
-        case MULTI_BRANCH:
+        case "MULTI_BRANCH":
             setAsMultiBranch(request, response)
             break;
-        case ONE_BRANCH:
+        case "ONE_BRANCH":
             setAsOneBranch(request, response)
             break;
     }
