@@ -35,6 +35,7 @@ def call(ProcessBranchNameRequest request, AppConfig appConfig) {
 
 def setAsMultiBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse response) {
     String branchName = request.branchName
+    echo "Applyting strategy MultiBranch on ${branchName}"
     def releasePattern = /release\/(.*)/
     switch (branchName) {
         case ~releasePattern:
@@ -71,6 +72,7 @@ def setAsMultiBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse
 
 def setAsOneBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse response) {
     String branchName = request.branchName
+    echo "Applyting strategy OneBranch on ${branchName}"
     String appVersion = getVersionSignature(env.APP_WORKDIR);
     String libVersion = getVersionSignature(SharedLibrary.getWorkdir(env));
     String version = String.format("%s-%s", appVersion, libVersion)
