@@ -75,7 +75,7 @@ def setAsOneBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse r
     String version = String.format("%s-%s", appVersion, libVersion)
     switch (branchName) {
         case "main":
-        case "develop":
+        case "master":
             response.version = version
             response.doBuild = true
             response.doDeploy = true
