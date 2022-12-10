@@ -39,7 +39,7 @@ def call(ProcessBranchNameRequest request) {
         case "main":
         case "develop":
             String appVersion = getVersionSignature(env.APP_WORKDIR);
-            String libVersion = getVersionSignature(SharedLibrary.getWordir(env));
+            String libVersion = getVersionSignature(SharedLibrary.getWorkdir(env));
             response.version = String.format("%s-%s", appVersion, libVersion)
             response.doBuild = true
             response.doDeploy = true
