@@ -100,9 +100,9 @@ static String buildVersionTag(String appVersion, String libVersion) {
 static String sanitize(String tag) {
 //    String tag = String.format("%s-%s", appVersion, libVersion)
     tag = tag.replaceAll("/", "-")
-    if(tag.length() > 128) {
-        tag = tag.substring(tag.length() - 128, tag.length())
-    }
+//    if(tag.length() > 128) {
+//        tag = tag.substring(tag.length() - 128, tag.length())
+//    }
     return tag
 }
 
