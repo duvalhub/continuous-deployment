@@ -3,6 +3,7 @@ import com.duvalhub.processbranchname.ProcessBranchNameRequest
 import com.duvalhub.initializeworkdir.SharedLibrary
 import com.duvalhub.processbranchname.ProcessBranchNameResponse
 import com.duvalhub.appconfig.AppConfig
+import com.sun.org.apache.xerces.internal.parsers.CachingParserPool
 
 def call(ProcessBranchNameRequest request, AppConfig appConfig) {
     ProcessBranchNameResponse response = new ProcessBranchNameResponse()
@@ -37,6 +38,8 @@ def setAsMultiBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse
     String branchName = request.branchName
     echo "Applyting strategy MultiBranch on ${branchName}"
     def releasePattern = /release\/(.*)/
+    String appVersion = getVersionSignature(env.APP_WORKDIR);
+    String libVersion = getVersionSignature(SharedLibrary.getWorkdir(env));
     switch (branchName) {
         case ~releasePattern:
             def matcher = branchName =~ releasePattern
@@ -54,8 +57,6 @@ def setAsMultiBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse
             break;
         case "main":
         case "develop":
-            String appVersion = getVersionSignature(env.APP_WORKDIR);
-            String libVersion = getVersionSignature(SharedLibrary.getWorkdir(env));
             response.version = buildVersionTag(appVersion, libVersion)
             response.doBuild = true
             response.doDeploy = true
@@ -63,7 +64,7 @@ def setAsMultiBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse
             break
         default:
             response.doBuild = true
-            response.version = "latest"
+            response.version = buildVersionTag(appVersion, libVersion, branchName)
             response.doDeploy = true
             response.deployEnv = "dev"
             break
@@ -75,18 +76,17 @@ def setAsOneBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse r
     echo "Applyting strategy OneBranch on ${branchName}"
     String appVersion = getVersionSignature(env.APP_WORKDIR);
     String libVersion = getVersionSignature(SharedLibrary.getWorkdir(env));
-    String version = buildVersionTag(appVersion, libVersion)
     switch (branchName) {
         case "main":
         case "master":
-            response.version = version
+            response.version = buildVersionTag(appVersion, libVersion)
             response.doBuild = true
             response.doDeploy = true
             response.deployEnv = "prod"
             break
         default:
             response.doBuild = true
-            response.version = sanitize(String.format("%s-%s", branchName, version))
+            response.version = buildVersionTag(appVersion, libVersion, branchName)
             response.doDeploy = true
             response.deployEnv = "dev"
             break
@@ -97,10 +97,13 @@ static String buildVersionTag(String appVersion, String libVersion) {
     return String.format("%s-%s", appVersion, libVersion)
 }
 
+static String buildVersionTag(String appVersion, String libVersion, String branchName) {
+    return sanitize(String.format("%s-%s", branchName, buildVersionTag(appVersion, libVersion)))
+}
+
 static String sanitize(String tag) {
-//    String tag = String.format("%s-%s", appVersion, libVersion)
     tag = tag.replaceAll("/", "-")
-    if(tag.length() > 128) {
+    if (tag.length() > 128) {
         tag = tag.substring(tag.length() - 128, tag.length())
     }
     return tag
@@ -127,9 +130,9 @@ String getTag(String path) {
                         IFS='/' read -ra URL_PARTS <<<"$origin_url"
                         echo "Parts are ${URL_PARTS[@]}"
                         git remote set-url origin git@${SSH_HOST}:${URL_PARTS[3]}/${URL_PARTS[4]}
+                        git fetch --tags > /dev/null
                     '''
-            sh "git fetch --tags > /dev/null"
-            response.version = sh(returnStdout: true, script: '''
+            return sh(returnStdout: true, script: '''
                         git tag --points-at HEAD
                     ''').trim()
         }
