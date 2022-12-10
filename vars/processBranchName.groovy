@@ -93,7 +93,7 @@ def setAsOneBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse r
     }
 }
 
-static String sanitize(String appVersion, String libVersion) {
+String sanitize(String appVersion, String libVersion) {
     String tag = String.format("%s-%s", appVersion, libVersion)
     tag = tag.replaceAll("/", "-")
     if(tag.length() > 128) {
