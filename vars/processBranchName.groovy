@@ -19,21 +19,7 @@ def call(ProcessBranchNameRequest request) {
         case "master":
         case "production":
             response.doDeploy = true
-            dir(env.APP_WORKDIR) {
-                withSshKey("github.com", "SERVICE_ACCOUNT_SSH", "git") {
-                    sh '''#!/usr/bin/env bash
-                        origin_url=$(git remote get-url origin)
-                        echo "URL = $origin_url"
-                        IFS='/' read -ra URL_PARTS <<<"$origin_url"
-                        echo "Parts are ${URL_PARTS[@]}"
-                        git remote set-url origin git@${SSH_HOST}:${URL_PARTS[3]}/${URL_PARTS[4]}
-                    '''
-                    sh "git fetch --tags > /dev/null"
-                    response.version = sh(returnStdout: true, script: '''
-                        git tag --points-at HEAD
-                    ''').trim()
-                }
-            }
+            response.version = getTag(env.APP_WORKDIR)
             response.deployEnv = "prod"
             break;
         case "main":
@@ -78,5 +64,23 @@ def getVersionSignature(path) {
                     git rev-parse --short HEAD
                 ''').trim()
         return String.format("%s.%s", buildNumber, shortCommit)
+    }
+}
+
+def String getTag(String path) {
+    dir(path) {
+        withSshKey("github.com", "SERVICE_ACCOUNT_SSH", "git") {
+            sh '''#!/usr/bin/env bash
+                        origin_url=$(git remote get-url origin)
+                        echo "URL = $origin_url"
+                        IFS='/' read -ra URL_PARTS <<<"$origin_url"
+                        echo "Parts are ${URL_PARTS[@]}"
+                        git remote set-url origin git@${SSH_HOST}:${URL_PARTS[3]}/${URL_PARTS[4]}
+                    '''
+            sh "git fetch --tags > /dev/null"
+            response.version = sh(returnStdout: true, script: '''
+                        git tag --points-at HEAD
+                    ''').trim()
+        }
     }
 }
