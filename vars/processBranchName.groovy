@@ -86,7 +86,7 @@ def setAsOneBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse r
             break
         default:
             response.doBuild = true
-            response.version = String.format("%s-%s", sanitize(String.format("%s-%s", branchName, version)))
+            response.version = sanitize(String.format("%s-%s", branchName, version))
             response.doDeploy = true
             response.deployEnv = "dev"
             break
