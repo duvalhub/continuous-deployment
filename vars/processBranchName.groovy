@@ -1,3 +1,4 @@
+import com.duvalhub.appconfig.StrategyType
 import com.duvalhub.processbranchname.ProcessBranchNameRequest
 import com.duvalhub.initializeworkdir.SharedLibrary
 import com.duvalhub.processbranchname.ProcessBranchNameResponse
@@ -6,12 +7,12 @@ import com.duvalhub.appconfig.AppConfig
 def call(ProcessBranchNameRequest request, AppConfig appConfig) {
     ProcessBranchNameResponse response = new ProcessBranchNameResponse()
     String branchName = request.branchName
-    String type = appConfig.strategy.type
+    StrategyType type = appConfig.strategy.type
     switch (type) {
-        case "MULTI_BRANCH":
+        case StrategyType.MULTI_BRANCH:
             setAsMultiBranch(request, response)
             break;
-        case "ONE_BRANCH":
+        case StrategyType.ONE_BRANCH:
             setAsOneBranch(request, response)
             break;
     }
