@@ -56,7 +56,7 @@ def setAsMultiBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse
         case "develop":
             String appVersion = getVersionSignature(env.APP_WORKDIR);
             String libVersion = getVersionSignature(SharedLibrary.getWorkdir(env));
-            response.version = String.format("%s-%s", appVersion, libVersion)
+            response.version = buildVersionTag(appVersion, libVersion)
             response.doBuild = true
             response.doDeploy = true
             response.deployEnv = "dev"
@@ -75,7 +75,7 @@ def setAsOneBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse r
     echo "Applyting strategy OneBranch on ${branchName}"
     String appVersion = getVersionSignature(env.APP_WORKDIR);
     String libVersion = getVersionSignature(SharedLibrary.getWorkdir(env));
-    String version = sanitize(appVersion, libVersion)
+    String version = buildVersionTag(appVersion, libVersion)
     switch (branchName) {
         case "main":
         case "master":
@@ -86,15 +86,19 @@ def setAsOneBranch(ProcessBranchNameRequest request, ProcessBranchNameResponse r
             break
         default:
             response.doBuild = true
-            response.version = String.format("%s-%s", sanitize(appVersion, libVersion), version)
+            response.version = String.format("%s-%s", sanitize(String.format("%s-%s", branchName, version)))
             response.doDeploy = true
             response.deployEnv = "dev"
             break
     }
 }
 
-String sanitize(String appVersion, String libVersion) {
-    String tag = String.format("%s-%s", appVersion, libVersion)
+static String buildVersionTag(String appVersion, String libVersion) {
+    return String.format("%s-%s", appVersion, libVersion)
+}
+
+static String sanitize(String tag) {
+//    String tag = String.format("%s-%s", appVersion, libVersion)
     tag = tag.replaceAll("/", "-")
     if(tag.length() > 128) {
         tag = tag.substring(tag.length() - 128, tag.length())
