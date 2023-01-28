@@ -5,9 +5,11 @@ import com.duvalhub.processbranchname.ProcessBranchNameResponse
 import com.duvalhub.deploy.DeployRequest
 import com.duvalhub.initializeworkdir.InitializeWorkdirIn
 
-def call() {
+def call(Map params) {
     dockerSlave() {
         InitializeWorkdirIn initializeWorkdirIn = new InitializeWorkdirIn()
+        initializeWorkdirIn.configGitBranch = params.configGitBranch
+
         AppConfig conf = initializeWorkdir.stage(initializeWorkdirIn)
 
         ProcessBranchNameRequest processBranchNameRequest = new ProcessBranchNameRequest(BRANCH_NAME)
