@@ -8,7 +8,7 @@ import com.duvalhub.initializeworkdir.InitializeWorkdirIn
 def call(Map params) {
     dockerSlave() {
         InitializeWorkdirIn initializeWorkdirIn = new InitializeWorkdirIn()
-        initializeWorkdirIn.configGitBranch = params.configGitBranch
+        initializeWorkdirIn.configGitBranch = params?.configGitBranch
 
         AppConfig conf = initializeWorkdir.stage(initializeWorkdirIn)
 
