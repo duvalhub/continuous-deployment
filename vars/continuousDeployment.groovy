@@ -9,6 +9,7 @@ def call(Map params) {
     dockerSlave() {
         InitializeWorkdirIn initializeWorkdirIn = new InitializeWorkdirIn()
         initializeWorkdirIn.configGitBranch = params?.configGitBranch
+        initializeWorkdirIn.appConfig = params?.config
 
         AppConfig conf = initializeWorkdir.stage(initializeWorkdirIn)
 
