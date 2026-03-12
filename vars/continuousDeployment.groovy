@@ -23,8 +23,9 @@ def call(Map params) {
         }
 
         if (processBranchNameResponse.doDeploy) {
-            echo "### Deploying app version '${processBranchNameResponse.version}' in '${processBranchNameResponse.deployEnv}'"
-            DeployRequest deployRequest = new DeployRequest(conf, processBranchNameResponse.version, processBranchNameResponse.deployEnv)
+            String configLabel = "master"
+            echo "### Deploying app version '${processBranchNameResponse.version}' in '${processBranchNameResponse.deployEnv}' with config label '${configLabel}'"
+            DeployRequest deployRequest = new DeployRequest(conf, processBranchNameResponse.version, processBranchNameResponse.deployEnv, configLabel)
             deploy(deployRequest)
         }
     }
